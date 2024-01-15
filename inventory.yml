@@ -1,7 +1,6 @@
 # Please don't edit this file directly! It will be reset when you update the git repository
 # Instead, put your variable customizations into custom.yml
 ---
-
 all:
   hosts:
     localhost:
@@ -30,6 +29,8 @@ all:
 
     wireguard_host: "wg.{{ root_host }}"
 
+    vaultwarden_host: "vw.{{ root_host }}"
+
     wireguard_subnet: "10.8.0.x"
 
     wireguard_client_allowed_ips: "0.0.0.0/0, ::/0"
@@ -37,6 +38,8 @@ all:
     adguard_host: "adguard.{{ root_host }}"
 
     wireguard_port: "51820"
+
+    vaultwarden_port: "81"
 
     # Possible choices: cloudflare, quad9, google
     #

@@ -1,0 +1,19 @@
+---
+- name: Make sure the Vaultwarden container is created and running
+  register: vaultwarden_result
+  retries: 5
+  until: vaultwarden_result is succeeded
+  community.general.docker_container:
+    name: "vaultwarden"
+    image: "vaultwarden/server:{{ vaultwarden_version }}"
+    pull: yes
+    networks:
+      - name: wg_network
+        ipv4_address: 10.8.2.9
+    state: "started"
+    ports:
+      - "{{ vaultwarden_port }}:80"
+      - "3012:3012"
+    volumes:
+      - "{{ docker_dir }}/vw-data:/data"
+    restart_policy: unless-stopped

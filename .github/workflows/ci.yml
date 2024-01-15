@@ -161,8 +161,6 @@ jobs:
       - name: Install git and expect (Debian-based)
         run: ssh root@$SERVER_IPV4 apt install -y git expect wamerican
 
-
-
       - uses: infraway/create-dns-record@v2.0
         with:
           type: "A"
@@ -184,6 +182,14 @@ jobs:
         with:
           type: "CNAME"
           name: "wg.${{ env.EASYVPN_USERNAME }}.${{ secrets.CLOUDFLARE_DOMAIN }}"
+          content: "${{ env.EASYVPN_USERNAME }}.${{ secrets.CLOUDFLARE_DOMAIN }}"
+          proxied: false
+          token: ${{ secrets.CLOUDFLARE_TOKEN }}
+          zone: ${{ secrets.CLOUDFLARE_ZONE }}
+      - uses: infraway/create-dns-record@v2.0
+        with:
+          type: "CNAME"
+          name: "vw.${{ env.EASYVPN_USERNAME }}.${{ secrets.CLOUDFLARE_DOMAIN }}"
           content: "${{ env.EASYVPN_USERNAME }}.${{ secrets.CLOUDFLARE_DOMAIN }}"
           proxied: false
           token: ${{ secrets.CLOUDFLARE_TOKEN }}
@@ -229,8 +235,6 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-
-
       - name: Regsiter the private key with the ssh-agent
         run: expect -c "spawn ssh-add $HOME/.ssh/id_vpn; expect -re \"Enter passphrase.*\"; send -- \"$EASYVPN_PASSWORD\r\"; expect -re \"Identity added.*\""
 
@@ -244,7 +248,7 @@ jobs:
 
       - name: Copy the private key to the Github root
         run: cp $HOME/.ssh/id_vpn id_vpn
-        
+
       - name: Log into the server and execute the script again for idempotency
         run: >-
           ssh -t -t $EASYVPN_USERNAME@$SERVER_IPV4 "export LETSENCRYPT_STAGING=$LETSENCRYPT_STAGING; ansible-easy-vpn/testing/expect/idempotency.exp --password $EASYVPN_PASSWORD"
@@ -282,14 +286,6 @@ jobs:
         with:
           name: "private-ssh-key-4"
           path: "id_vpn"
-
-
-
-
-
-
-
-
 
     outputs:
       EASYVPN_USERNAME_1: "${{ steps.random_username.outputs.EASYVPN_USERNAME_1 }}"
@@ -355,8 +351,6 @@ jobs:
           name: "private-ssh-key-4"
           path: /home/runner/.ssh
 
-
-
       - name: Set the correct permissions for the SSH key
         run: |
           chmod 700 $HOME/.ssh
@@ -397,7 +391,7 @@ jobs:
           EASYVPN_PASSWORD: "${{ needs.build.outputs[format('EASYVPN_PASSWORD_{0}', matrix.index)] }}"
           DOMAIN: "${{ needs.build.outputs[format('EASYVPN_USERNAME_{0}', matrix.index)] }}.${{ secrets.CLOUDFLARE_DOMAIN }}"
 
-      - name: Upload Selenium testing screenshots 
+      - name: Upload Selenium testing screenshots
         if: always()
         uses: actions/upload-artifact@v4
         with:

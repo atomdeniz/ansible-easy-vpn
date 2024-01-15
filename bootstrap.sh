@@ -239,9 +239,9 @@ echo
 echo "Enter your domain name"
 echo "The domain name should already resolve to the IP address of your server"
 if [[ "$adguard_enable" =~ ^[yY]$ ]]; then
-  echo "Make sure that 'wg', 'auth' and 'adguard' subdomains also point to that IP (not necessary with DuckDNS)"
+  echo "Make sure that 'wg', 'auth', 'vw' and 'adguard' subdomains also point to that IP (not necessary with DuckDNS)"
 else
-  echo "Make sure that 'wg' and 'auth' subdomains also point to that IP (not necessary with DuckDNS)"
+  echo "Make sure that 'wg', 'vw' and 'auth' subdomains also point to that IP (not necessary with DuckDNS)"
 fi
 echo
 read -p "Domain name: " root_host
@@ -270,9 +270,9 @@ done
 echo
 echo "Running certbot in dry-run mode to test the validity of the domain..."
 if [[ "$adguard_enable" =~ ^[yY]$ ]]; then
-  $SUDO .venv/bin/certbot certonly --non-interactive --break-my-certs --force-renewal --agree-tos --email root@localhost.com --standalone --staging -d $root_host -d wg.$root_host -d auth.$root_host -d adguard.$root_host || $SUDO .venv/bin/certbot certonly --non-interactive --force-renewal --agree-tos --email root@localhost.com --standalone -d $root_host -d wg.$root_host -d auth.$root_host -d adguard.$root_host || exit
+  $SUDO .venv/bin/certbot certonly --non-interactive --break-my-certs --force-renewal --agree-tos --email root@localhost.com --standalone --staging -d $root_host -d wg.$root_host -d vw.$root_host -d auth.$root_host -d adguard.$root_host || $SUDO .venv/bin/certbot certonly --non-interactive --force-renewal --agree-tos --email root@localhost.com --standalone -d $root_host -d wg.$root_host -d vw.$root_host -d auth.$root_host -d adguard.$root_host || exit
 else
-  $SUDO .venv/bin/certbot certonly --non-interactive --break-my-certs --force-renewal --agree-tos --email root@localhost.com --standalone --staging -d $root_host -d wg.$root_host -d auth.$root_host || $SUDO .venv/bin/certbot certonly --non-interactive --force-renewal --agree-tos --email root@localhost.com --standalone -d $root_host -d wg.$root_host -d auth.$root_host  || exit
+  $SUDO .venv/bin/certbot certonly --non-interactive --break-my-certs --force-renewal --agree-tos --email root@localhost.com --standalone --staging -d $root_host -d wg.$root_host -d vw.$root_host -d auth.$root_host || $SUDO .venv/bin/certbot certonly --non-interactive --force-renewal --agree-tos --email root@localhost.com --standalone -d $root_host -d wg.$root_host -d vw.$root_host -d auth.$root_host  || exit
 fi
 echo "OK"
 
