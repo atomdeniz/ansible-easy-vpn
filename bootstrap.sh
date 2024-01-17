@@ -127,15 +127,6 @@ elif [[ "$os" == "centos" ]]; then
   install_dependencies_centos
 fi
 
-# Clone the Ansible playbook
-if [ -d "$HOME/ansible-easy-vpn" ]; then
-  pushd $HOME/ansible-easy-vpn
-  git pull
-  popd
-else
-  git clone https://github.com/notthebee/ansible-easy-vpn $HOME/ansible-easy-vpn
-fi
-
 # Set up a Python venv
 set +e
 if which python3.9; then
