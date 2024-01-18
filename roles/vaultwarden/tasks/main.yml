@@ -9,10 +9,9 @@
     pull: yes
     networks:
       - name: wg_network
-        ipv4_address: 10.8.2.9
+        ipv4_address: 10.8.2.6
     state: "started"
     ports:
-      - "{{ vaultwarden_port }}:80"
       - "3012:3012"
     volumes:
       - "{{ docker_dir }}/vw-data:/data"
