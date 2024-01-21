@@ -99,6 +99,9 @@ all:
       - desc: "Allow Adguard"
         proto: tcp
         port: "3000"
+      - desc: "Allow portainer"
+        proto: tcp
+        port: "9000"
       - desc: "Allow Vaultwarden"
         proto: tcp
         port: "{{ vaultwarden_port }}"
