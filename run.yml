@@ -60,6 +60,10 @@
     - role: vaultwarden
       tags:
         - vaultwarden
+    
+   - role: portainer
+      tags:
+        - portainer
 
     - role: chriswayg.msmtp-mailer
       when: email_password is defined

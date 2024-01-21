@@ -12,7 +12,7 @@
         ipv4_address: 10.8.2.6
     state: "started"
     ports:
-      - "3012:3012"
+      - "{{ vaultwarden_port }}:3012"
     volumes:
       - "{{ docker_dir }}/vw-data:/data"
     restart_policy: unless-stopped

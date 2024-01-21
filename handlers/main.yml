@@ -8,8 +8,3 @@
   community.general.docker_container:
     name: bunkerweb
     restart: yes
-
-- name: Restart vaultwarden
-  community.general.docker_container:
-    name: vaultwarden
-    restart: yes

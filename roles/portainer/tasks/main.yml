@@ -1,0 +1,16 @@
+- name: Ensure the Portainer container is created and running
+  register: portainer_result
+  retries: 5
+  until: portainer_result is succeeded
+  community.general.docker_container:
+    name: "portainer"
+    image: "portainer/portainer-ce:{{ portainer_version }}"
+    pull: yes
+    networks:
+      - name: wg_network
+        ipv4_address: 10.8.2.7
+    state: "started"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "{{ docker_dir }}/portainer_data:/data"
+    restart_policy: unless-stopped

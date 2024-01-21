@@ -270,9 +270,9 @@ domain_ip=$(dig +short @1.1.1.1 ${root_host})
 echo
 echo "Running certbot in dry-run mode to test the validity of the domain..."
 if [[ "$adguard_enable" =~ ^[yY]$ ]]; then
-  $SUDO .venv/bin/certbot certonly --non-interactive --break-my-certs --force-renewal --agree-tos --email root@localhost.com --standalone --staging -d $root_host -d wg.$root_host -d vw.$root_host -d auth.$root_host -d adguard.$root_host || $SUDO .venv/bin/certbot certonly --non-interactive --force-renewal --agree-tos --email root@localhost.com --standalone -d $root_host -d wg.$root_host -d vw.$root_host -d auth.$root_host -d adguard.$root_host || exit
+  $SUDO .venv/bin/certbot certonly --non-interactive --break-my-certs --force-renewal --agree-tos --email root@localhost.com --standalone --staging -d $root_host -d wg.$root_host -d vw.$root_host -d health.$root_host -d auth.$root_host -d adguard.$root_host || $SUDO .venv/bin/certbot certonly --non-interactive --force-renewal --agree-tos --email root@localhost.com --standalone -d $root_host -d wg.$root_host -d vw.$root_host -d health.$root_host -d auth.$root_host -d adguard.$root_host || exit
 else
-  $SUDO .venv/bin/certbot certonly --non-interactive --break-my-certs --force-renewal --agree-tos --email root@localhost.com --standalone --staging -d $root_host -d wg.$root_host -d vw.$root_host -d auth.$root_host || $SUDO .venv/bin/certbot certonly --non-interactive --force-renewal --agree-tos --email root@localhost.com --standalone -d $root_host -d wg.$root_host -d vw.$root_host -d auth.$root_host  || exit
+  $SUDO .venv/bin/certbot certonly --non-interactive --break-my-certs --force-renewal --agree-tos --email root@localhost.com --standalone --staging -d $root_host -d wg.$root_host -d vw.$root_host -d health.$root_host -d auth.$root_host || $SUDO .venv/bin/certbot certonly --non-interactive --force-renewal --agree-tos --email root@localhost.com --standalone -d $root_host -d wg.$root_host -d vw.$root_host -d health.$root_host -d auth.$root_host  || exit
 fi
 echo "OK"
 
