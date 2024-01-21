@@ -96,6 +96,9 @@ all:
       - desc: "Allow Wireguard"
         proto: udp
         port: "{{ wireguard_port }}"
+      - desc: "Allow Adguard"
+        proto: tcp
+        port: "3000"
       - desc: "Allow Vaultwarden"
         proto: tcp
         port: "{{ vaultwarden_port }}"
