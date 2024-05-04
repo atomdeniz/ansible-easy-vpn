@@ -35,7 +35,7 @@ all:
 
     adguard_host: "adguard.{{ root_host }}"
 
-    bunkerweb_host: "bunker.{{ root_host }}"
+    bunkerweb_host: "{{ root_host }}"
 
     wireguard_subnet: "10.8.0.x"
 
