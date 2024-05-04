@@ -3,7 +3,7 @@ FROM alpine:3.15
 
 RUN apk add --no-cache \
         libcap \
-        unbound=1.19.0 \
+        unbound \
         dnscrypt-proxy
 
 WORKDIR /tmp
@@ -13,7 +13,7 @@ RUN wget https://www.internic.net/domain/named.root -qO- >> /etc/unbound/root.hi
 COPY files/ /opt/
 
 # AdGuardHome
-RUN wget https://github.com/AdguardTeam/AdGuardHome/releases/download/v0.107.42/AdGuardHome_linux_{{ 'arm64' if ansible_architecture == 'aarch64' else 'amd64' }}.tar.gz >/dev/null 2>&1 \
+RUN wget https://github.com/AdguardTeam/AdGuardHome/releases/download/v0.107.48/AdGuardHome_linux_{{ 'arm64' if ansible_architecture == 'aarch64' else 'amd64' }}.tar.gz >/dev/null 2>&1 \
         && mkdir -p /opt/adguardhome/conf /opt/adguardhome/work \
         && tar xf AdGuardHome_linux_{{ 'arm64' if ansible_architecture == 'aarch64' else 'amd64' }}.tar.gz ./AdGuardHome/AdGuardHome  --strip-components=2 -C /opt/adguardhome \
         && /bin/ash /opt/adguardhome \

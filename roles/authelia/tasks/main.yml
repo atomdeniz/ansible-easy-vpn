@@ -50,9 +50,6 @@
   community.general.docker_container:
     name: "authelia"
     image: "authelia/authelia:{{ authelia_version }}"
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:9091"]
-      start_period: 10s
     networks:
       - name: wg_network
         ipv4_address: 10.8.2.4
