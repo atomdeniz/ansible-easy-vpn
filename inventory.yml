@@ -35,6 +35,8 @@ all:
 
     adguard_host: "adguard.{{ root_host }}"
 
+    bunkerweb_host: "bunker.{{ root_host }}"
+
     wireguard_subnet: "10.8.0.x"
 
     wireguard_client_allowed_ips: "0.0.0.0/0, ::/0"
@@ -48,13 +50,6 @@ all:
     # In case you've enabled Adguard, Unbound and DoH functionality,
     # this will also set upstream DoH resolvers for dnscrypt
     dns_nameservers: cloudflare
-
-    # This will enable Adguard, Unbound and dnscrypt-proxy
-    # for secure DNS resolution with ad-blocking functionality
-    #
-    # The ad blocking is disabled by default, you need to navigate to
-    # adguard.your_domain.com to set it up.
-    enable_adguard_unbound_doh: false
 
     # Set the time at which the system should reboot after installing updates (24H format)
     autoupdate_reboot_time: 03:00
@@ -96,21 +91,9 @@ all:
       - desc: "Allow Wireguard"
         proto: udp
         port: "{{ wireguard_port }}"
-      - desc: "Allow Adguard"
-        proto: tcp
-        port: "3000"
-      - desc: "Allow portainer"
-        proto: tcp
-        port: "9000"
       - desc: "Allow Vaultwarden"
         proto: tcp
         port: "{{ vaultwarden_port }}"
-      - desc: "Allow HTTP"
-        proto: tcp
-        port: "80"
-      - desc: "Allow HTTPS"
-        proto: tcp
-        port: "443"
       - desc: "Allow SSH"
         proto: tcp
         port: "{{ ssh_port }}"

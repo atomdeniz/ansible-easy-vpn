@@ -220,29 +220,13 @@ until [[ "$user_password" == "$user_password2" ]]; do
   read -s -p "Repeat password: " user_password2
 done
 
-echo
-echo "Would you like to enable Adguard, Unbound and DNS-over-HTTP"
-echo "for secure DNS resolution with ad blocking functionality?"
-echo "This functionality is experimental and might lead to instability"
-echo
-read -p "Enable Adguard? [y/N]: " adguard_enable
-until [[ "$adguard_enable" =~ ^[yYnN]*$ ]]; do
-  echo "$adguard_enable: invalid selection."
-  read -p "[y/N]: " adguard_enable
-done
-if [[ "$adguard_enable" =~ ^[yY]$ ]]; then
-  echo "enable_adguard_unbound_doh: true" >> $HOME/ansible-easy-vpn/custom.yml
-fi
 
 echo
 echo
 echo "Enter your domain name"
 echo "The domain name should already resolve to the IP address of your server"
-if [[ "$adguard_enable" =~ ^[yY]$ ]]; then
-  echo "Make sure that 'wg', 'auth', 'vw' and 'adguard' subdomains also point to that IP (not necessary with DuckDNS)"
-else
-  echo "Make sure that 'wg', 'vw' and 'auth' subdomains also point to that IP (not necessary with DuckDNS)"
-fi
+echo "Make sure that 'wg', 'auth', 'vw' and 'adguard' subdomains also point to that IP (not necessary with DuckDNS)"
+
 echo
 read -p "Domain name: " root_host
 until [[ "$root_host" =~ ^[a-z0-9\.\-]*$ ]]; do
@@ -253,27 +237,9 @@ done
 public_ip=$(curl -s https://api.ipify.org)
 domain_ip=$(dig +short @1.1.1.1 ${root_host})
 
-# until [[ $domain_ip =~ $public_ip ]]; do
-#   echo
-#   echo "The domain $root_host does not resolve to the public IP of this server ($public_ip)"
-#   echo
-#   root_host_prev=$root_host
-#   read -p "Domain name [$root_host_prev]: " root_host
-#   if [ -z ${root_host} ]; then
-#     root_host=$root_host_prev
-#   fi
-#   public_ip=$(curl -s ipinfo.io/ip)
-#   domain_ip=$(dig +short @1.1.1.1 ${root_host})
-#   echo
-# done
-
 echo
 echo "Running certbot in dry-run mode to test the validity of the domain..."
-if [[ "$adguard_enable" =~ ^[yY]$ ]]; then
-  $SUDO .venv/bin/certbot certonly --non-interactive --break-my-certs --force-renewal --agree-tos --email root@localhost.com --standalone --staging -d $root_host -d wg.$root_host -d vw.$root_host -d health.$root_host -d auth.$root_host -d adguard.$root_host || $SUDO .venv/bin/certbot certonly --non-interactive --force-renewal --agree-tos --email root@localhost.com --standalone -d $root_host -d wg.$root_host -d vw.$root_host -d health.$root_host -d auth.$root_host -d adguard.$root_host || exit
-else
-  $SUDO .venv/bin/certbot certonly --non-interactive --break-my-certs --force-renewal --agree-tos --email root@localhost.com --standalone --staging -d $root_host -d wg.$root_host -d vw.$root_host -d health.$root_host -d auth.$root_host || $SUDO .venv/bin/certbot certonly --non-interactive --force-renewal --agree-tos --email root@localhost.com --standalone -d $root_host -d wg.$root_host -d vw.$root_host -d health.$root_host -d auth.$root_host  || exit
-fi
+$SUDO .venv/bin/certbot certonly --non-interactive --break-my-certs --force-renewal --agree-tos --email root@localhost.com --standalone --staging -d $root_host -d wg.$root_host -d vw.$root_host -d health.$root_host -d auth.$root_host -d adguard.$root_host || $SUDO .venv/bin/certbot certonly --non-interactive --force-renewal --agree-tos --email root@localhost.com --standalone -d $root_host -d wg.$root_host -d vw.$root_host -d health.$root_host -d auth.$root_host -d adguard.$root_host || exit
 echo "OK"
 
 echo "root_host: \"${root_host}\"" >> $HOME/ansible-easy-vpn/custom.yml

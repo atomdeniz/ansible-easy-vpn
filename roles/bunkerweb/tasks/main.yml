@@ -31,9 +31,6 @@
     pull: yes
     state: "started"
     env_file: "{{ docker_dir }}/bunkerweb/.env"
-    ports:
-      - "80:80"
-      - "443:443"
     volumes:
       - "{{ docker_dir }}/bunkerweb/data:/data"
       - "/lib/modules:/lib/modules"

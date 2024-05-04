@@ -37,7 +37,6 @@
         - fail2ban
 
     - role: dns
-      when: enable_adguard_unbound_doh | default(False)
       tags:
         - dns
 
