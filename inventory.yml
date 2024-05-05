@@ -35,7 +35,7 @@ all:
 
     adguard_host: "adguard.{{ root_host }}"
 
-    bunkerweb_host: "{{ root_host }}"
+    bunkerweb_host: "bunker.{{ root_host }}"
 
     wireguard_subnet: "10.8.0.x"
 
@@ -94,6 +94,12 @@ all:
       - desc: "Allow Vaultwarden"
         proto: tcp
         port: "{{ vaultwarden_port }}"
+      - desc: "Allow HTTP"
+        proto: tcp
+        port: "80"
+      - desc: "Allow HTTPS"
+        proto: tcp
+        port: "443"
       - desc: "Allow SSH"
         proto: tcp
         port: "{{ ssh_port }}"
