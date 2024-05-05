@@ -23,6 +23,7 @@
     mode: "0644"
 
 - name: Enable and start the iptables service
+  notify: Restart iptables
   ansible.builtin.service:
     name: iptables
     state: started

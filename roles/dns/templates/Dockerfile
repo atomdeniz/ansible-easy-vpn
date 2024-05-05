@@ -1,14 +1,15 @@
 
-FROM alpine:3.15
+FROM alpine:3.18
 
 RUN apk add --no-cache \
         libcap \
-        unbound \
+        unbound=1.19.3-r0 \
         dnscrypt-proxy
 
 WORKDIR /tmp
 
-RUN wget https://www.internic.net/domain/named.root -qO- >> /etc/unbound/root.hints
+RUN echo "nameserver 1.1.1.1" > /etc/resolv.conf && \ 
+    wget https://www.internic.net/domain/named.root -qO- >> /etc/unbound/root.hints
 
 COPY files/ /opt/
 
