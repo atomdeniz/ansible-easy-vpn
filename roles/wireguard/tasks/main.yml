@@ -1,15 +1,7 @@
 ---
 - name: Switch between encrypted and unencrypted DNS depending on the user choice
   ansible.builtin.set_fact:
-    wireguard_dns: >-
-      {%- if "cloudflare" in dns_nameservers -%}
-        {%- set wireguard_dns = "1.1.1.1,1.0.0.1" -%}
-      {%- elif "quad9" in dns_nameservers -%}
-        {%- set wireguard_dns = "9.9.9.9,149.112.112.112" -%}
-      {%- else -%}
-        {%- set wireguard_dns = "8.8.8.8,8.8.4.4" -%}
-      {%- endif -%}
-      {{- wireguard_dns -}}
+    wireguard_dns: "10.8.2.2"
 
 - name: Load the iptable_nat module (CentOS)
   when: 'ansible_os_family == "RedHat"'
