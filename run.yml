@@ -60,6 +60,14 @@
       tags:
         - vaultwarden
 
+    - role: changedetect
+      tags:
+        - changedetect
+
+    - role: mywebsite
+      tags:
+        - mywebsite
+
     - role: portainer
       tags:
         - portainer

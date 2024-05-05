@@ -28,9 +28,13 @@ access_control:
   rules:
     - domain: {{ authelia_host }}
       policy: bypass
+    - domain: {{ root_host }}
+      policy: bypass
     - domain: {{ wireguard_host }}
       policy: two_factor
     - domain: {{ vaultwarden_host }}
+      policy: two_factor
+    - domain: {{ changedetect_host }}
       policy: two_factor
     - domain: {{ portainer_host }}
       policy: two_factor

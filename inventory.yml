@@ -7,7 +7,7 @@ all:
       ansible_connection: local
 
   vars:
-    username: notthebee
+    username: atomdeniz
 
     root_host: example.duckdns.org
 
@@ -27,11 +27,13 @@ all:
 
     authelia_host: "auth.{{ root_host }}"
 
-    wireguard_host: "wg.{{ root_host }}"
+    wireguard_host: "vpn.{{ root_host }}"
 
     portainer_host: "health.{{ root_host }}"
 
-    vaultwarden_host: "vw.{{ root_host }}"
+    vaultwarden_host: "password.{{ root_host }}"
+
+    changedetect_host: "changedetect.{{ root_host }}"
 
     adguard_host: "adguard.{{ root_host }}"
 
