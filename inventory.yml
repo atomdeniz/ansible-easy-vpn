@@ -25,6 +25,8 @@ all:
     # This overrides `enable_ssh_keygen`
     # ssh_public_key: ""
 
+    my_ip: "128.140.80.85"
+
     www_host: "www.{{ root_host }}"
 
     authelia_host: "auth.{{ root_host }}"
