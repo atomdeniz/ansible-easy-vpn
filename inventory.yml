@@ -25,6 +25,8 @@ all:
     # This overrides `enable_ssh_keygen`
     # ssh_public_key: ""
 
+    www_host: "www.{{ root_host }}"
+
     authelia_host: "auth.{{ root_host }}"
 
     wireguard_host: "vpn.{{ root_host }}"
