@@ -16,5 +16,5 @@
     state: "started"
     volumes:
       - "{{ docker_dir }}/privatebin/data:/srv/data"
-      - "{{ docker_dir }}/privatebin/conf/conf.php:srv/cfg/conf.php:ro"
+      - "{{ docker_dir }}/privatebin/cfg/conf.php:/srv/cfg/conf.php:ro"
     restart_policy: unless-stopped
