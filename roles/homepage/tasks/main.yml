@@ -8,8 +8,8 @@
     image: "ghcr.io/gethomepage/homepage:{{ homepage_version }}"
     pull: yes
     env:
-      PUID: 1000
-      PGID: 1000
+      PUID: "1000"
+      PGID: "1000"
     networks:
       - name: wg_network
         ipv4_address: 10.8.2.11
