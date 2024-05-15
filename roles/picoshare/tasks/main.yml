@@ -7,9 +7,9 @@
     name: "picoshare"
     image: "mtlynch/picoshare:{{ picoshare_version }}"
     pull: yes
-    environment:
-      - PORT=4001
-      - PS_SHARED_SECRET=0$1:DC#5PnR73
+    env:
+      "PORT": "4001"
+      "PS_SHARED_SECRET": "0$1:DC#5PnR73"
     networks:
       - name: wg_network
         ipv4_address: 10.8.2.12
