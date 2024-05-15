@@ -41,6 +41,12 @@ all:
 
     adguard_host: "adguard.{{ root_host }}"
 
+    homepage_host: "home.{{ root_host }}"
+
+    picoshare_host: "share.{{ root_host }}"
+
+    privatebin_host: "paste.{{ root_host }}"
+
     wireguard_subnet: "10.8.0.x"
 
     wireguard_client_allowed_ips: "0.0.0.0/0, ::/0"
@@ -108,7 +114,6 @@ all:
         proto: tcp
         port: "{{ ssh_port }}"
 
-    # Fail2Ban only comes with the SSH jail by default
     enable_fail2ban: true
 
     pip_install_packages:

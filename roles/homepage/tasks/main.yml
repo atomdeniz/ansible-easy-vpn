@@ -1,0 +1,20 @@
+---
+- name: Make sure the Homepage container is created and running
+  register: homepage_result
+  retries: 5
+  until: homepage_result is succeeded
+  community.general.docker_container:
+    name: "homepage"
+    image: "ghcr.io/gethomepage/homepage:{{ homepage_version }}"
+    pull: yes
+    environment:
+      PUID: 1000
+      PGID: 1000
+    networks:
+      - name: wg_network
+        ipv4_address: 10.8.2.11
+    state: "started"
+    volumes:
+      - "{{ docker_dir }}/homepage:/app/config"
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    restart_policy: unless-stopped

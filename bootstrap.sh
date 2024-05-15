@@ -225,7 +225,6 @@ echo
 echo
 echo "Enter your domain name"
 echo "The domain name should already resolve to the IP address of your server"
-echo "Make sure that 'wg', 'auth', 'vw' and 'adguard' subdomains also point to that IP (not necessary with DuckDNS)"
 
 echo
 read -p "Domain name: " root_host
@@ -246,7 +245,32 @@ case $answer in
     [Yy]* ) 
         echo "Proceeding with certificate renewal..."
         # If user confirms, run certbot in dry-run mode
-        $SUDO .venv/bin/certbot certonly --non-interactive --break-my-certs --force-renewal --agree-tos --email root@localhost.com --standalone --staging -d $root_host -d vpn.$root_host -d password.$root_host -d health.$root_host -d auth.$root_host -d adguard.$root_host -d changedetect.$root_host || $SUDO .venv/bin/certbot certonly --non-interactive --force-renewal --agree-tos --email root@localhost.com --standalone -d $root_host -d vpn.$root_host -d password.$root_host -d health.$root_host -d auth.$root_host -d adguard.$root_host -d changedetect.$root_host 
+        $SUDO .venv/bin/certbot certonly --non-interactive --break-my-certs \
+        --force-renewal --agree-tos --email root@localhost.com --standalone --staging \
+        -d $root_host \
+        -d www.$root_host \
+        -d vpn.$root_host \
+        -d password.$root_host \
+        -d health.$root_host \
+        -d auth.$root_host \
+        -d adguard.$root_host \
+        -d changedetect.$root_host \
+        -d home.$root_host \
+        -d share.$root_host \
+        -d paste.$root_host || \
+        $SUDO .venv/bin/certbot certonly --non-interactive --force-renewal \
+        --agree-tos --email root@localhost.com --standalone \
+        -d $root_host \
+        -d www.$root_host \
+        -d vpn.$root_host \
+        -d password.$root_host \
+        -d health.$root_host \
+        -d auth.$root_host \
+        -d adguard.$root_host \
+        -d changedetect.$root_host \
+        -d home.$root_host \
+        -d share.$root_host \
+        -d paste.$root_host
         ;;
     [Nn]* ) 
         echo "Certificate renewal was skipped by the user."
@@ -255,6 +279,7 @@ case $answer in
         echo "Invalid input. Please enter 'y' for yes or 'n' for no."
         ;;
 esac
+
 
 # Here you can continue with other tasks or script sections
 echo "Continuing with other tasks..."

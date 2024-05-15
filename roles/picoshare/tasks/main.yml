@@ -1,0 +1,20 @@
+---
+- name: Make sure the Homepage container is created and running
+  register: picoshare_result
+  retries: 5
+  until: picoshare_result is succeeded
+  community.general.docker_container:
+    name: "picoshare"
+    image: "mtlynch/picoshare:{{ picoshare_version }}"
+    pull: yes
+    environment:
+      - PORT=4001
+      - PS_SHARED_SECRET=0$1:DC#5PnR73
+    networks:
+      - name: wg_network
+        ipv4_address: 10.8.2.12
+    command: -db /data/store.db
+    state: "started"
+    volumes:
+      - "{{ docker_dir }}/picoshare:/data"
+    restart_policy: unless-stopped

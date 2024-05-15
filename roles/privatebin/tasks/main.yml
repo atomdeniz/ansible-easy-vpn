@@ -1,0 +1,16 @@
+---
+- name: Make sure the privatebin container is created and running
+  register: privatebin_result
+  retries: 5
+  until: privatebin_result is succeeded
+  community.general.docker_container:
+    name: "privatebin"
+    image: "privatebin/nginx-fpm-alpine:{{ privatebin_version }}"
+    pull: yes
+    networks:
+      - name: wg_network
+        ipv4_address: 10.8.2.13
+    state: "started"
+    volumes:
+      - "{{ docker_dir }}/privatebin:/srv/data"
+    restart_policy: unless-stopped
