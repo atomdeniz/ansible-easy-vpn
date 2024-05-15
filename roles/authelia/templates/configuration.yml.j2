@@ -30,6 +30,14 @@ access_control:
       policy: bypass
     - domain: {{ root_host }}
       policy: bypass
+    - domain: {{ www_host }}
+      policy: bypass
+    - domain: {{ picoshare_host }}
+      policy: bypass
+    - domain: {{ homepage_host }}
+      policy: bypass
+    - domain: {{ privatebin_host }}
+      policy: two_factor
     - domain: {{ wireguard_host }}
       policy: two_factor
     - domain: {{ vaultwarden_host }}
