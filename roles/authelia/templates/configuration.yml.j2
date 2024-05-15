@@ -34,9 +34,9 @@ access_control:
       policy: bypass
     - domain: {{ picoshare_host }}
       policy: bypass
-    - domain: {{ homepage_host }}
-      policy: bypass
     - domain: {{ privatebin_host }}
+      policy: bypass
+    - domain: {{ homepage_host }}
       policy: two_factor
     - domain: {{ wireguard_host }}
       policy: two_factor
