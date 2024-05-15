@@ -7,7 +7,7 @@
     name: "homepage"
     image: "ghcr.io/gethomepage/homepage:{{ homepage_version }}"
     pull: yes
-    environment:
+    env:
       PUID: 1000
       PGID: 1000
     networks:
