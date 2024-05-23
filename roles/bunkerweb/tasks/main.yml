@@ -2,10 +2,10 @@
 - name: Create the bw-universe network
   community.general.docker_network:
     name: bw-universe
-    ipam_config:
-      - subnet: 10.8.3.0/24
-        gateway: 10.8.3.1
-        iprange: 10.8.3.0/24
+    ipam_options:
+      driver: default
+      config:
+        - subnet: 10.20.30.0/24
 
 - name: Create the bw-docker network
   community.general.docker_network:
