@@ -1,5 +1,4 @@
 ---
----
 - name: Create the bw-universe network
   community.general.docker_network:
     name: bw-universe
