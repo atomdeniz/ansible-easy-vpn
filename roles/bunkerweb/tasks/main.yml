@@ -1,17 +1,20 @@
 ---
-- name: Ensure the Docker networks are created
+---
+- name: Create the bw-universe network
   community.general.docker_network:
-    name: "{{ item.name }}"
-    ipam_options: "{{ item.ipam | default(omit) }}"
-  loop:
-    - name: bw-universe
-      ipam:
-        driver: default
-        config:
-          - subnet: 10.20.30.0/24
-    - name: bw-services
-    - name: wg_network
-    - name: bw-docker
+    name: bw-universe
+    ipam_config:
+      - subnet: 10.8.3.0/24
+        gateway: 10.8.3.1
+        iprange: 10.8.3.0/24
+
+- name: Create the bw-docker network
+  community.general.docker_network:
+    name: bw-docker
+
+- name: Create the bw-services network
+  community.general.docker_network:
+    name: bw-services
 
 - name: Create the folders
   ansible.builtin.file:
