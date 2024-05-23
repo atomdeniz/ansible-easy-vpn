@@ -7,8 +7,8 @@
     group: 101
     mode: 0770
   loop:
-    - bunkerweb/
-    - bunkerweb/data
+    - bw-data/
+    - bw-data/data
 
 - name: Copy the env file
   ansible.builtin.template:
@@ -16,25 +16,53 @@
     owner: root
     group: 101
     mode: 0644
-    dest: "{{ docker_dir }}/bunkerweb/.env"
+    dest: "{{ docker_dir }}/bw-data/.env"
 
-- name: Make sure the Bunkerweb container is created and running
-  register: bunkerweb_result
-  retries: 5
-  until: bunkerweb_result is succeeded
+- name: Run bunkerweb container
   community.general.docker_container:
     name: "bunkerweb"
     image: "bunkerity/bunkerweb:{{ bunkerweb_version }}"
+    ports:
+      - "80:8080"
+      - "443:8443"
+    labels:
+      - "bunkerweb.INSTANCE=yes"
+    env_file: "{{ docker_dir }}/bw-data/.env"
     networks:
+      - name: bw-universe
+      - name: bw-services
       - name: wg_network
         ipv4_address: 10.8.2.5
-    pull: yes
-    state: "started"
-    env_file: "{{ docker_dir }}/bunkerweb/.env"
-    ports:
-      - "80:80"
-      - "443:443"
+    state: started
+    restart_policy: unless-stopped
+
+- name: Run bw-scheduler container
+  community.general.docker_container:
+    name: "bw-scheduler"
+    image: "bunkerity/bunkerweb-scheduler:{{ bunkerweb_version }}"
+    depends_on:
+      - bunkerweb
+      - bw-docker
     volumes:
-      - "{{ docker_dir }}/bunkerweb/data:/data"
-      - "/lib/modules:/lib/modules"
+      - bw-data:/data
+    environment:
+      - DOCKER_HOST=tcp://bw-docker:2375
+    networks:
+      - name: bw-universe
+      - name: bw-docker
+    state: started
+    restart_policy: unless-stopped
+
+- name: Run bw-docker container
+  community.general.docker_container:
+    name: bw-docker
+    image: tecnativa/docker-socket-proxy:{{ bw_docker_version }}
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      - CONTAINERS=1
+      - LOG_LEVEL=warning
+    networks:
+      - name: bw-docker
+    state: started
     restart_policy: unless-stopped
