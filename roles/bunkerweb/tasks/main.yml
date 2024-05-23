@@ -56,13 +56,10 @@
   community.general.docker_container:
     name: "bw-scheduler"
     image: "bunkerity/bunkerweb-scheduler:{{ bunkerweb_version }}"
-    depends_on:
-      - bunkerweb
-      - bw-docker
     volumes:
       - bw-data:/data
-    environment:
-      - DOCKER_HOST=tcp://bw-docker:2375
+    env:
+      DOCKER_HOST: "tcp://bw-docker:2375"
     networks:
       - name: bw-universe
       - name: bw-docker
@@ -72,12 +69,12 @@
 - name: Run bw-docker container
   community.general.docker_container:
     name: bw-docker
-    image: tecnativa/docker-socket-proxy:{{ bw_docker_version }}"
+    image: "tecnativa/docker-socket-proxy:{{ bw_docker_version }}"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
-    environment:
-      - CONTAINERS=1
-      - LOG_LEVEL=warning
+    env:
+      CONTAINERS: "1"
+      LOG_LEVEL: "warning"
     networks:
       - name: bw-docker
     state: started
