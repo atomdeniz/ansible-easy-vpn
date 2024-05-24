@@ -1,11 +1,16 @@
 ---
+- name: Create the bw-universe network
+  community.general.docker_network:
+    name: bw-universe
+    ipam_driver: default
+    ipam_config:
+      - subnet: 10.20.30.0/24
+        gateway: 10.20.30.1
+        iprange: 10.20.30.0/24
+
 - name: Create the bw-docker network
   community.general.docker_network:
     name: bw-docker
-
-- name: Create the bw-services network
-  community.general.docker_network:
-    name: bw-services
 
 - name: Create the folders
   ansible.builtin.file:
@@ -37,7 +42,7 @@
       bunkerweb.INSTANCE: "yes"
     env_file: "{{ docker_dir }}/bw-data/.env"
     networks:
-      - name: bw-services
+      - name: bw-universe
       - name: wg_network
         ipv4_address: 10.8.2.5
     state: started
@@ -52,8 +57,7 @@
     env:
       DOCKER_HOST: "tcp://bw-docker:2375"
     networks:
-      - name: wg_network
-        ipv4_address: 10.8.2.14
+      - name: bw-universe
       - name: bw-docker
     state: started
     restart_policy: unless-stopped
