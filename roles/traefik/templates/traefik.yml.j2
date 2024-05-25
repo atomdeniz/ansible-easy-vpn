@@ -55,6 +55,10 @@ http:
         frameDeny: true
         contentTypeNosniff: true
         browserXssFilter: true
+    dashboard-auth:
+      basicAuth:
+        users:
+          - "admin:$apr1$H6uskkkW$IgXLP6rZe4SUhuQ0RzTP0/" # admin:password
 
   routers:
     mywebsite:
@@ -150,6 +154,17 @@ http:
       service: privatebin
       tls:
         certResolver: myresolver
+    
+    dashboard:
+      rule: "Host(`{{ traefik_host }}`)"
+      service: api@internal
+      entryPoints:
+        - websecure
+      middlewares:
+        - dashboard-auth
+      tls:
+        certResolver: myresolver
+
 
   services:
     mywebsite:
