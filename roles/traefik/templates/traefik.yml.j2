@@ -1,16 +1,10 @@
 
-enable: true
-
 global:
   checkNewVersion: true
   sendAnonymousUsage: false
 
 api:
   dashboard: true
-
-log:
-  level: INFO
-  path: {{ docker_dir }}/traefik/traefik.log
 
 entryPoints:
   web:
@@ -22,7 +16,7 @@ certificatesResolvers:
   myresolver:
     acme:
       email: root@localhost.com
-      storage: /letsencrypt/acme.json
+      storage: acme.json
       httpChallenge:
         entryPoint: web
 
@@ -60,6 +54,7 @@ http:
           requestHeaderName: "X-Forwarded-For"
     security:
       headers:
+        sslRedirect: no
         stsIncludeSubdomains: true
         stsPreload: true
         frameDeny: true

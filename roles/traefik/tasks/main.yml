@@ -32,6 +32,7 @@
     volumes:
       - "{{ docker_dir }}/traefik/traefik.yml:/etc/traefik/traefik.yml"
       - "{{ docker_dir }}/traefik/letsencrypt:/letsencrypt"
+      - "{{ docker_dir }}/traefik/acme.json:/etc/traefik/acme.json"
       - /var/run/docker.sock:/var/run/docker.sock
     labels:
       traefik.enable: "true"
