@@ -34,5 +34,5 @@
       - "traefik.enable=true"
     volumes:
       - "{{ docker_dir }}/traefik/traefik.yml:/etc/traefik/traefik.yml"
-      - "{{ traefik_dir }}/acme.json:/etc/traefik/acme.json"
+      - "{{ docker_dir }}/traefik/acme.json:/etc/traefik/acme.json"
       - /var/run/docker.sock:/var/run/docker.sock
