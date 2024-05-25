@@ -31,7 +31,7 @@
       - "80:80"
       - "443:443"
     labels:
-      - "traefik.enable=true"
+      traefik.enable: "true"
     volumes:
       - "{{ docker_dir }}/traefik/traefik.yml:/etc/traefik/traefik.yml"
       - "{{ docker_dir }}/traefik/acme.json:/etc/traefik/acme.json"
