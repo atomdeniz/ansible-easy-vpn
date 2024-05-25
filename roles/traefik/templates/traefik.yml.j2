@@ -25,6 +25,9 @@ providers:
     endpoint: "unix:///var/run/docker.sock"
     exposedByDefault: false
 
+docker:
+  network: "wg_network"
+
 middlewares:
   authelia:
     forwardAuth:
@@ -174,7 +177,7 @@ http:
   services:
     mywebsite:
       loadBalancer:
-        servers:
+        server:
           - url: "http://mywebsite:8080"
     vaultwarden:
       loadBalancer:
