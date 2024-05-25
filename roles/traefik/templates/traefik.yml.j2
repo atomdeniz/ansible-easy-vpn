@@ -1,3 +1,10 @@
+
+global:
+  checkNewVersion: true
+  sendAnonymousUsage: false
+
+
+
 api:
   dashboard: true
 
@@ -11,7 +18,7 @@ certificatesResolvers:
   myresolver:
     acme:
       email: root@localhost.com
-      storage: acme.json
+      storage: /letsencrypt/acme.json
       httpChallenge:
         entryPoint: web
 
@@ -154,7 +161,7 @@ http:
       service: privatebin
       tls:
         certResolver: myresolver
-    
+
     dashboard:
       rule: "Host(`{{ traefik_host }}`)"
       service: api@internal

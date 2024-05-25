@@ -32,5 +32,5 @@
       - "443:443"
     volumes:
       - "{{ docker_dir }}/traefik/traefik.yml:/etc/traefik/traefik.yml"
-      - "{{ docker_dir }}/traefik/acme.json:/etc/traefik/acme.json"
+      - "{{ docker_dir }}/traefik/letsencrypt:/letsencrypt"
       - /var/run/docker.sock:/var/run/docker.sock
