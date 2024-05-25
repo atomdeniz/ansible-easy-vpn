@@ -34,3 +34,5 @@
       - "{{ docker_dir }}/traefik/traefik.yml:/etc/traefik/traefik.yml"
       - "{{ docker_dir }}/traefik/letsencrypt:/letsencrypt"
       - /var/run/docker.sock:/var/run/docker.sock
+    labels:
+      - "traefik.enable=true"

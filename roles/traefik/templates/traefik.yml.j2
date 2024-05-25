@@ -1,4 +1,6 @@
 
+enable: true
+
 global:
   checkNewVersion: true
   sendAnonymousUsage: false
@@ -58,7 +60,6 @@ http:
           requestHeaderName: "X-Forwarded-For"
     security:
       headers:
-        sslRedirect: true
         stsIncludeSubdomains: true
         stsPreload: true
         frameDeny: true
