@@ -3,10 +3,12 @@ global:
   checkNewVersion: true
   sendAnonymousUsage: false
 
-
-
 api:
   dashboard: true
+
+log:
+  level: INFO
+  path: {{ docker_dir }}/traefik/traefik.log
 
 entryPoints:
   web:
