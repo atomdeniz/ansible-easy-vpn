@@ -1,0 +1,190 @@
+api:
+  dashboard: true
+
+entryPoints:
+  web:
+    address: ":80"
+  websecure:
+    address: ":443"
+
+certificatesResolvers:
+  myresolver:
+    acme:
+      email: root@localhost.com
+      storage: acme.json
+      httpChallenge:
+        entryPoint: web
+
+providers:
+  docker:
+    endpoint: "unix:///var/run/docker.sock"
+    exposedByDefault: false
+
+middlewares:
+  authelia:
+    forwardAuth:
+      address: "http://authelia:9091/api/verify?rd=https://{{ authelia_host }}/?rd=https://{{ root_host }}"
+      trustForwardHeader: true
+      authResponseHeaders:
+        - "X-Forwarded-User"
+        - "X-Forwarded-Email"
+        - "Remote-User"
+        - "Remote-Groups"
+  ipWhitelist:
+    ipWhiteList:
+      sourceRange:
+        - "{{ my_ip }}/32"
+
+http:
+  middlewares:
+    gzip:
+      compress:
+        enabled: true
+    limitreq:
+      rateLimit:
+        rateSet:
+          requests: 40
+          burst: 20
+        sourceCriterion:
+          requestHeaderName: "X-Forwarded-For"
+    security:
+      headers:
+        sslRedirect: true
+        stsIncludeSubdomains: true
+        stsPreload: true
+        frameDeny: true
+        contentTypeNosniff: true
+        browserXssFilter: true
+
+  routers:
+    mywebsite:
+      rule: "Host(`{{ root_host }}`)"
+      entryPoints:
+        - websecure
+      middlewares:
+        - authelia
+      service: mywebsite
+      tls:
+        certResolver: myresolver
+
+    vaultwarden:
+      rule: "Host(`{{ vaultwarden_host }}`)"
+      entryPoints:
+        - websecure
+      middlewares:
+        - authelia
+        - ipWhitelist
+      service: vaultwarden
+      tls:
+        certResolver: myresolver
+
+    changedetect:
+      rule: "Host(`{{ changedetect_host }}`)"
+      entryPoints:
+        - websecure
+      middlewares:
+        - authelia
+        - ipWhitelist
+      service: changedetect
+      tls:
+        certResolver: myresolver
+
+    wireguard:
+      rule: "Host(`{{ wireguard_host }}`)"
+      entryPoints:
+        - websecure
+      middlewares:
+        - authelia
+        - ipWhitelist
+      service: wireguard
+      tls:
+        certResolver: myresolver
+
+    portainer:
+      rule: "Host(`{{ portainer_host }}`)"
+      entryPoints:
+        - websecure
+      middlewares:
+        - authelia
+        - ipWhitelist
+      service: portainer
+      tls:
+        certResolver: myresolver
+
+    adguard:
+      rule: "Host(`{{ adguard_host }}`)"
+      entryPoints:
+        - websecure
+      middlewares:
+        - authelia
+        - ipWhitelist
+      service: adguard
+      tls:
+        certResolver: myresolver
+
+    homepage:
+      rule: "Host(`{{ homepage_host }}`)"
+      entryPoints:
+        - websecure
+      middlewares:
+        - authelia
+        - ipWhitelist
+      service: homepage
+      tls:
+        certResolver: myresolver
+
+    picoshare:
+      rule: "Host(`{{ picoshare_host }}`)"
+      entryPoints:
+        - websecure
+      middlewares:
+        - authelia
+      service: picoshare
+      tls:
+        certResolver: myresolver
+
+    privatebin:
+      rule: "Host(`{{ privatebin_host }}`)"
+      entryPoints:
+        - websecure
+      service: privatebin
+      tls:
+        certResolver: myresolver
+
+  services:
+    mywebsite:
+      loadBalancer:
+        servers:
+          - url: "http://mywebsite:8080"
+    vaultwarden:
+      loadBalancer:
+        servers:
+          - url: "http://vaultwarden:80"
+    changedetect:
+      loadBalancer:
+        servers:
+          - url: "http://changedetect:5000"
+    wireguard:
+      loadBalancer:
+        servers:
+          - url: "http://wg-easy:51821"
+    portainer:
+      loadBalancer:
+        servers:
+          - url: "http://portainer:9000"
+    adguard:
+      loadBalancer:
+        servers:
+          - url: "http://adguard-unbound-doh:3000"
+    homepage:
+      loadBalancer:
+        servers:
+          - url: "http://homepage:3000"
+    picoshare:
+      loadBalancer:
+        servers:
+          - url: "http://picoshare:4001"
+    privatebin:
+      loadBalancer:
+        servers:
+          - url: "http://privatebin:8080"

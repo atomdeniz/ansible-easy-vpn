@@ -48,9 +48,9 @@
       tags:
         - authelia
 
-    - role: bunkerweb
+    - role: traefik
       tags:
-        - bunkerweb
+        - traefik
 
     - role: wireguard
       tags:

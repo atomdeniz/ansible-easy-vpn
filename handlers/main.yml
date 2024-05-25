@@ -4,7 +4,7 @@
     name: authelia
     restart: yes
 
-- name: Restart bunkerweb
+- name: Restart traefik
   community.general.docker_container:
-    name: bunkerweb
+    name: traefik
     restart: yes

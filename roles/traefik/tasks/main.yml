@@ -1,0 +1,38 @@
+---
+- name: Ensures traefik dir exists
+  ansible.builtin.file:
+    path: "{{ docker_dir }}/traefik"
+    state: directory
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: "0755"
+
+- name: Ensures acme.json file exists
+  file:
+    path: "{{ docker_dir }}/traefik/acme.json"
+    state: touch
+    mode: 0600
+
+- name: Adding traefik.yml file
+  template:
+    src: traefik.yml.j2
+    dest: "{{ docker_dir }}/traefik/traefik.yml"
+    mode: 0600
+
+- name: Create the traefik container
+  docker_container:
+    name: traefik
+    image: traefik:{{ traefik_version }}
+    restart_policy: unless-stopped
+    networks:
+      - name: wg_network
+        ipv4_address: 10.8.2.5
+    ports:
+      - "80:80"
+      - "443:443"
+    labels:
+      - "traefik.enable=true"
+    volumes:
+      - "{{ docker_dir }}/traefik/traefik.yml:/etc/traefik/traefik.yml"
+      - "{{ traefik_dir }}/acme.json:/etc/traefik/acme.json"
+      - /var/run/docker.sock:/var/run/docker.sock
