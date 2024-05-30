@@ -14,7 +14,7 @@
     labels:
       traefik.enable: "true"
       traefik.http.routers.vault.entrypoints: "http"
-      traefik.http.routers.vault.rule: "Host(`{{ s }}`)"
+      traefik.http.routers.vault.rule: "Host(`{{ vaultwarden_host }}`)"
       traefik.http.middlewares.vault-https-redirect.redirectscheme.scheme: "https"
       traefik.http.routers.vault.middlewares: "vault-https-redirect"
       traefik.http.routers.vault-secure.entrypoints: "https"
