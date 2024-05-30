@@ -55,6 +55,16 @@
         ipv4_address: 10.8.2.4
     pull: yes
     state: "started"
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.authelia.rule: "Host(`{{ authelia_host }}`)"
+      traefik.http.routers.authelia.entrypoints: "https"
+      traefik.http.routers.authelia.tls: "true"
+      traefik.http.middlewares.authelia.forwardauth.address: "http://authelia:9091/api/verify?rd=https://{{ authelia_host }}"
+      traefik.http.middlewares.authelia.forwardauth.trustForwardHeader: "true"
+      traefik.http.middlewares.authelia.forwardauth.authResponseHeaders: "Remote-User, Remote-Groups, Remote-Name, Remote-Email"
+    exposed_ports:
+      - "9091"
     volumes:
       - "{{ docker_dir }}/authelia:/config"
     restart_policy: unless-stopped
