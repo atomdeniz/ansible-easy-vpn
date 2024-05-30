@@ -12,7 +12,7 @@
       - no-new-privileges:true
     networks:
       - name: homelab
-      ipv4_address: 10.8.2.20
+        ipv4_address: 10.8.2.20
     labels:
       traefik.enable: "true"
       traefik.http.routers.uptime.entrypoints: "http"

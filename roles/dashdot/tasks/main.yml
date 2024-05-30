@@ -9,7 +9,7 @@
     privileged: true
     networks:
       - name: homelab
-      ipv4_address: 10.8.2.14
+        ipv4_address: 10.8.2.14
     volumes:
       - "/:/mnt/host:ro"
     env:
