@@ -15,11 +15,11 @@
     labels:
       traefik.enable: "true"
       traefik.http.routers.mywebsite.entrypoints: "http"
-      traefik.http.routers.mywebsite.rule: "Host(`{{ domain }}`)"
+      traefik.http.routers.mywebsite.rule: "Host(`{{ root_host }}`)"
       traefik.http.middlewares.mywebsite-https-redirect.redirectscheme.scheme: "https"
       traefik.http.routers.mywebsite.middlewares: "mywebsite-https-redirect"
       traefik.http.routers.mywebsite-secure.entrypoints: "https"
-      traefik.http.routers.mywebsite-secure.rule: "Host(`{{ domain }}`)"
+      traefik.http.routers.mywebsite-secure.rule: "Host(`{{ root_host }}`)"
       traefik.http.routers.mywebsite-secure.tls: "true"
       traefik.http.routers.mywebsite-secure.service: "mywebsite"
       traefik.http.routers.mywebsite-secure.middlewares: "authelia@docker"
