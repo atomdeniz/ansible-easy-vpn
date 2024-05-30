@@ -62,6 +62,7 @@
       - no-new-privileges:true
     networks:
       - name: homelab
+      ipv4_address: 10.8.2.19
     ports:
       - "80:80"
       - "443:443"

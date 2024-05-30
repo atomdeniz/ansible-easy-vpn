@@ -50,6 +50,7 @@
     command: "--config.file=/etc/prometheus/prometheus.yml"
     networks:
       - name: homelab
+      ipv4_address: 10.8.2.15
 
 - name: Create node exporter container
   community.docker.docker_container:
@@ -64,6 +65,7 @@
       - /:/host:ro,rslave
     networks:
       - name: homelab
+      ipv4_address: 10.8.2.16
 
 - name: Get cadvisor latest release
   community.general.github_release:
@@ -90,6 +92,7 @@
       - /dev/kmsg
     networks:
       - name: homelab
+      ipv4_address: 10.8.2.17
 
 - name: Create grafana container
   community.docker.docker_container:
@@ -102,6 +105,7 @@
       - "{{ docker_dir }}/grafana-data:/var/lib/grafana"
     networks:
       - name: homelab
+      ipv4_address: 10.8.2.18
     labels:
       traefik.enable: "true"
       traefik.http.routers.grafana.entrypoints: "http"
