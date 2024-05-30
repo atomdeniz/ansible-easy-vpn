@@ -101,6 +101,7 @@
     pull: true
     state: started
     restart_policy: unless-stopped
+    user: "$UID:$GID"
     volumes:
       - "{{ docker_dir }}/grafana-data:/var/lib/grafana"
     networks:
