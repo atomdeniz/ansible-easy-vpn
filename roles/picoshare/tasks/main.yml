@@ -9,12 +9,25 @@
     pull: yes
     env:
       "PORT": "4001"
-      "PS_SHARED_SECRET": "0$1:DC#5PnR73"
+      "PS_SHARED_SECRET": "{{ picoshare_shared_secret }}"
     networks:
-      - name: wg_network
+      - name: homelab
         ipv4_address: 10.8.2.12
     command: -db /data/store.db
     state: "started"
     volumes:
       - "{{ docker_dir }}/picoshare:/data"
     restart_policy: unless-stopped
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.picoshare.entrypoints: "http"
+      traefik.http.routers.picoshare.rule: "Host(`{{ picoshare_host }}`)"
+      traefik.http.middlewares.picoshare-https-redirect.redirectscheme.scheme: "https"
+      traefik.http.routers.picoshare.middlewares: "picoshare-https-redirect"
+      traefik.http.routers.picoshare-secure.entrypoints: "https"
+      traefik.http.routers.picoshare-secure.rule: "Host(`{{ picoshare_host }}`)"
+      traefik.http.routers.picoshare-secure.tls: "true"
+      traefik.http.routers.picoshare-secure.service: "picoshare"
+      traefik.http.routers.picoshare-secure.middlewares: "authelia@docker"
+      traefik.http.services.picoshare.loadbalancer.server.port: "4001"
+      traefik.docker.network: "homelab"

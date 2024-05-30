@@ -48,6 +48,14 @@ access_control:
       policy: two_factor
     - domain: {{ adguard_host }}
       policy: two_factor
+    - domain: {{ grafana_host }}
+      policy: two_factor
+    - domain: {{ traefik_host }}
+      policy: two_factor
+    - domain: {{ dashdot_host }}
+      policy: two_factor
+    - domain: {{ uptime_kuma_host }}
+      policy: two_factor
 
 session:
   name: authelia_session

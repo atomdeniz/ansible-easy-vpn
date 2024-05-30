@@ -8,7 +8,7 @@
     image: "dgtlmoon/changedetection.io:{{ changedetect_version }}"
     pull: yes
     networks:
-      - name: wg_network
+      - name: homelab
         ipv4_address: 10.8.2.9
     state: "started"
     volumes:

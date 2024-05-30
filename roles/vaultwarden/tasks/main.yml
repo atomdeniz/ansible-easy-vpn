@@ -8,9 +8,22 @@
     image: "vaultwarden/server:{{ vaultwarden_version }}"
     pull: yes
     networks:
-      - name: wg_network
+      - name: homelab
         ipv4_address: 10.8.2.6
     state: "started"
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.vault.entrypoints: "http"
+      traefik.http.routers.vault.rule: "Host(`{{ s }}`)"
+      traefik.http.middlewares.vault-https-redirect.redirectscheme.scheme: "https"
+      traefik.http.routers.vault.middlewares: "vault-https-redirect"
+      traefik.http.routers.vault-secure.entrypoints: "https"
+      traefik.http.routers.vault-secure.rule: "Host(`{{ vaultwarden_host }}`)"
+      traefik.http.routers.vault-secure.tls: "true"
+      traefik.http.routers.vault-secure.service: "vault"
+      traefik.http.routers.vault-secure.middlewares: "authelia@docker"
+      traefik.http.services.vault.loadbalancer.server.port: "80"
+      traefik.docker.network: "homelab"
     ports:
       - "{{ vaultwarden_port }}:3012"
     volumes:

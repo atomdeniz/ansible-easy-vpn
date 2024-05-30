@@ -11,10 +11,23 @@
       PUID: "1000"
       PGID: "1000"
     networks:
-      - name: wg_network
+      - name: homelab
         ipv4_address: 10.8.2.13
     state: "started"
     volumes:
       - "{{ docker_dir }}/privatebin/data:/srv/data"
       - "{{ docker_dir }}/privatebin/cfg/conf.php:/srv/cfg/conf.php:ro"
     restart_policy: unless-stopped
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.privatebin.entrypoints: "http"
+      traefik.http.routers.privatebin.rule: "Host(`{{ privatebin_host }}`)"
+      traefik.http.middlewares.privatebin-https-redirect.redirectscheme.scheme: "https"
+      traefik.http.routers.privatebin.middlewares: "privatebin-https-redirect"
+      traefik.http.routers.privatebin-secure.entrypoints: "https"
+      traefik.http.routers.privatebin-secure.rule: "Host(`{{ privatebin_host }}`)"
+      traefik.http.routers.privatebin-secure.tls: "true"
+      traefik.http.routers.privatebin-secure.service: "privatebin"
+      traefik.http.routers.privatebin-secure.middlewares: "authelia@docker"
+      traefik.http.services.privatebin.loadbalancer.server.port: "8080"
+      traefik.docker.network: "homelab"

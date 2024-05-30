@@ -37,7 +37,7 @@
       test: ["CMD", "redis-cli", "ping"]
       start_period: 5s
     networks:
-      - name: wg_network
+      - name: homelab
         ipv4_address: 10.8.2.3
     pull: yes
     state: "started"
@@ -51,7 +51,7 @@
     name: "authelia"
     image: "authelia/authelia:{{ authelia_version }}"
     networks:
-      - name: wg_network
+      - name: homelab
         ipv4_address: 10.8.2.4
     pull: yes
     state: "started"

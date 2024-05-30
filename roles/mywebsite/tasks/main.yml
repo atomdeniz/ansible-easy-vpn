@@ -8,7 +8,20 @@
     image: "874521/denizozogulsite:{{ mywebsite_version }}"
     pull: yes
     networks:
-      - name: wg_network
+      - name: homelab
         ipv4_address: 10.8.2.10
     state: "started"
     restart_policy: unless-stopped
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.mywebsite.entrypoints: "http"
+      traefik.http.routers.mywebsite.rule: "Host(`{{ domain }}`)"
+      traefik.http.middlewares.mywebsite-https-redirect.redirectscheme.scheme: "https"
+      traefik.http.routers.mywebsite.middlewares: "mywebsite-https-redirect"
+      traefik.http.routers.mywebsite-secure.entrypoints: "https"
+      traefik.http.routers.mywebsite-secure.rule: "Host(`{{ domain }}`)"
+      traefik.http.routers.mywebsite-secure.tls: "true"
+      traefik.http.routers.mywebsite-secure.service: "mywebsite"
+      traefik.http.routers.mywebsite-secure.middlewares: "authelia@docker"
+      traefik.http.services.mywebsite.loadbalancer.server.port: "8080"
+      traefik.docker.network: "homelab"

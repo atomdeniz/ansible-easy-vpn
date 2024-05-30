@@ -413,7 +413,17 @@ else
   echo "user_password: \"${user_password}\"" >> $HOME/ansible-easy-vpn/secret.yml
 fi
 
+# cloudflare mail and apikey 
+echo "cloudflare_email: \"${cloudflare_email}\"" >> $HOME/ansible-easy-vpn/secret.yml
+echo "cloudflare_api_key: \"${cloudflare_api_key}\"" >> $HOME/ansible-easy-vpn/secret.yml
 
+# Traefik basic auth
+echo "traefik_basic_auth_hash: \"${traefik_basic_auth_hash}\"" >> $HOME/ansible-easy-vpn/secret.yml
+
+# Pico shared secret  
+echo "picoshare_shared_secret: \"${picoshare_shared_secret}\"" >> $HOME/ansible-easy-vpn/secret.yml
+
+# Authelia secrets  
 jwt_secret=$(openssl rand -hex 23)
 session_secret=$(openssl rand -hex 23)
 storage_encryption_key=$(openssl rand -hex 23)

@@ -49,6 +49,12 @@ all:
 
     traefik_host: "traefik.{{ root_host }}"
 
+    grafana_host: "grafana.{{ root_host }}"
+
+    dashdot_host: "dash.{{ root_host }}"
+
+    uptime_kuma_host: "uptime.{{ root_host }}"
+
     wireguard_subnet: "10.8.0.x"
 
     wireguard_client_allowed_ips: "0.0.0.0/0, ::/0"

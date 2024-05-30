@@ -84,6 +84,18 @@
       tags:
         - picoshare
 
+    - role: grafana
+      tags:
+        - grafana
+
+    - role: dashdot
+      tags:
+        - dashdot
+
+    - role: uptime_kuma
+      tags:
+        - uptime_kuma
+
     - role: chriswayg.msmtp-mailer
       when: email_password is defined
       tags:

@@ -11,10 +11,23 @@
       PUID: "1000"
       PGID: "1000"
     networks:
-      - name: wg_network
+      - name: homelab
         ipv4_address: 10.8.2.11
     state: "started"
     volumes:
       - "{{ docker_dir }}/homepage:/app/config"
       - /var/run/docker.sock:/var/run/docker.sock:ro
     restart_policy: unless-stopped
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.homepage.entrypoints: "http"
+      traefik.http.routers.homepage.rule: "Host(`{{ homepage_host }}`)"
+      traefik.http.middlewares.homepage-https-redirect.redirectscheme.scheme: "https"
+      traefik.http.routers.homepage.middlewares: "homepage-https-redirect"
+      traefik.http.routers.homepage-secure.entrypoints: "https"
+      traefik.http.routers.homepage-secure.rule: "Host(`{{ homepage_host }}`)"
+      traefik.http.routers.homepage-secure.tls: "true"
+      traefik.http.routers.homepage-secure.service: "homepage"
+      traefik.http.routers.homepage-secure.middlewares: "authelia@docker"
+      traefik.http.services.homepage.loadbalancer.server.port: "3000"
+      traefik.docker.network: "homelab"
