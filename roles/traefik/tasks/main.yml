@@ -35,7 +35,7 @@
         insecureSkipVerify: true
       providers:
         docker:
-          endpoint: "unix:///var/run/docker.sock"
+          endpoint: "tcp://socket-proxy:2375"
           exposedByDefault: false
       certificatesResolvers:
         cloudflare:
@@ -63,11 +63,11 @@
     networks:
       - name: homelab
         ipv4_address: 10.8.2.19
+      - name: socket_proxy
     ports:
       - "80:80"
       - "443:443"
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
       - "{{ docker_dir }}/traefik/data/acme.json:/acme.json"
       - "{{ docker_dir }}/traefik/data/traefik.yml:/traefik.yml:ro"
     env:

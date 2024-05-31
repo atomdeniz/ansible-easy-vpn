@@ -10,9 +10,9 @@
     state: "started"
     env:
       WATCHTOWER_CLEANUP: "true"
-    volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock"
+      DOCKER_HOST: "tcp://socket-proxy:2375"
     networks:
       - name: homelab
         ipv4_address: 10.8.2.21
+      - name: socket_proxy
     restart_policy: unless-stopped
