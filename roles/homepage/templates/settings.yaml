@@ -1,0 +1,38 @@
+title: Deniz Homepage
+
+startUrl: https://denizozogul.com
+
+theme: dark
+ 
+- Network Management:
+    - Portainer (Homelab):
+        icon: portainer.png
+        href: https://10.8.2.7
+        description: Docker Container Management
+        server: my-docker
+        container: portainer
+        widget:
+          type: portainer
+          url: https://10.8.2.7
+          env: 1
+          key: KEY
+
+    # - Traefik (Homelab):
+    #     icon: traefik.png
+    #     href: https://IP
+    #     description: Reverse Proxy
+    #     server: my-docker
+    #     container: traefik
+    #     widget:
+    #       type: traefik
+    #       url: https://IP
+    #       env: 1
+    #       key: KEY
+
+    # - Pi Hole:
+    #     icon: pihole.png
+    #     href: http://IP
+    #     description: Network Protection
+    #     widget:
+    #       type: pihole
+    #       url: http://IP

@@ -1,4 +1,20 @@
 ---
+- name: Template the Homepage settings
+  ansible.builtin.template:
+    src: "settings.yaml"
+    dest: "{{ docker_dir }}/homepage/settings.yaml"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: "0775"
+
+- name: Template the Homepage docker settings
+  ansible.builtin.template:
+    src: "docker.yaml"
+    dest: "{{ docker_dir }}/homepage/docker.yaml"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: "0775"
+
 - name: Make sure the Homepage container is created and running
   register: homepage_result
   retries: 5

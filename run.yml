@@ -76,6 +76,10 @@
       tags:
         - privatebin
 
+    - role: dockerproxy
+      tags:
+        - dockerproxy
+
     - role: homepage
       tags:
         - homepage

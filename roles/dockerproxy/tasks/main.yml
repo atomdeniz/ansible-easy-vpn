@@ -1,0 +1,20 @@
+---
+- name: Make sure the dockerproxt container is created and running
+  register: dockerproxy_result
+  retries: 5
+  until: dockerproxy_result is succeeded
+  community.general.docker_container:
+    name: "dockerproxy"
+    image: "image: ghcr.io/tecnativa/docker-socket-proxy:{{ dockerproxy_version }}"
+    pull: yes
+    environment:
+      - CONTAINERS=1
+      - SERVICES=1
+      - TASKS=1
+      - POST=0
+    ports:
+      - 127.0.0.1:2375:2375
+    state: "started"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    restart_policy: unless-stopped
