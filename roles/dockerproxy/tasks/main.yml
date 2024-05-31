@@ -1,4 +1,9 @@
 ---
+- name: Create the dockerproxy network
+  community.general.docker_network:
+    name: dockerproxy
+    state: present
+
 - name: Make sure the dockerproxt container is created and running
   register: dockerproxy_result
   retries: 5
