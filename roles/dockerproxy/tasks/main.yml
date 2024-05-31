@@ -5,7 +5,7 @@
   until: dockerproxy_result is succeeded
   community.general.docker_container:
     name: "dockerproxy"
-    image: "image: ghcr.io/tecnativa/docker-socket-proxy:{{ dockerproxy_version }}"
+    image: "ghcr.io/tecnativa/docker-socket-proxy:{{ dockerproxy_version }}"
     pull: yes
     environment:
       - CONTAINERS=1
