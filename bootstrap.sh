@@ -234,58 +234,6 @@ until [[ "$root_host" =~ ^[a-z0-9\.\-]*$ ]]; do
 done
 
 public_ip=$(curl -s https://api.ipify.org)
-domain_ip=$(dig +short @1.1.1.1 ${root_host})
-
-echo
-echo "Testing the domain validity in dry-run mode before proceeding..."
-
-# Ask user to continue
-read -p "Do you want to proceed with certificate renewal? (y/n) " answer
-case $answer in
-    [Yy]* ) 
-        echo "Proceeding with certificate renewal..."
-        # If user confirms, run certbot in dry-run mode
-        $SUDO .venv/bin/certbot certonly --non-interactive --break-my-certs \
-        --force-renewal --agree-tos --email root@localhost.com --standalone --staging \
-        -d $root_host \
-        -d www.$root_host \
-        -d vpn.$root_host \
-        -d password.$root_host \
-        -d health.$root_host \
-        -d auth.$root_host \
-        -d adguard.$root_host \
-        -d changedetect.$root_host \
-        -d home.$root_host \
-        -d share.$root_host \
-        -d paste.$root_host || \
-        $SUDO .venv/bin/certbot certonly --non-interactive --force-renewal \
-        --agree-tos --email root@localhost.com --standalone \
-        -d $root_host \
-        -d www.$root_host \
-        -d vpn.$root_host \
-        -d password.$root_host \
-        -d health.$root_host \
-        -d auth.$root_host \
-        -d adguard.$root_host \
-        -d changedetect.$root_host \
-        -d home.$root_host \
-        -d share.$root_host \
-        -d paste.$root_host
-        ;;
-    [Nn]* ) 
-        echo "Certificate renewal was skipped by the user."
-        ;;
-    * ) 
-        echo "Invalid input. Please enter 'y' for yes or 'n' for no."
-        ;;
-esac
-
-
-# Here you can continue with other tasks or script sections
-echo "Continuing with other tasks..."
-
-# Example of additional script tasks
-echo "Running additional tasks..."
 
 echo "OK"
 

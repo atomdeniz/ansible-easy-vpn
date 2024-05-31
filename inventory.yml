@@ -9,7 +9,7 @@ all:
   vars:
     username: atomdeniz
 
-    root_host: example.duckdns.org
+    root_host: denizozogul.com
 
     enable_username_creation: yes
 

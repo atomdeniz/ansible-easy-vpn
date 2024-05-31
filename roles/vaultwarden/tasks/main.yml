@@ -24,6 +24,10 @@
       traefik.http.routers.vault-secure.middlewares: "authelia@docker"
       traefik.http.services.vault.loadbalancer.server.port: "80"
       traefik.docker.network: "homelab"
+      # homepage.name: "Vaultwarden"
+      # homepage.icon: "https://raw.githubusercontent.com/dani-garcia/vaultwarden/master/resources/vaultwarden-icon.svg"
+      # hompage.href: "https://{{ vaultwarden_host }}"
+
     ports:
       - "{{ vaultwarden_port }}:3012"
     volumes:
