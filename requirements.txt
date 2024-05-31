@@ -6,4 +6,3 @@ passlib
 bcrypt 
 wheel
 ansible>=4.10
-github3.py

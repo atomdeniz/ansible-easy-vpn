@@ -55,7 +55,7 @@
 - name: Create node exporter container
   community.docker.docker_container:
     name: node_exporter
-    image: quay.io/prometheus/node-exporter:{{ node_exporter_version}}
+    image: quay.io/prometheus/node-exporter:{{ node_exporter_version }}
     pull: true
     state: started
     pid_mode: host
@@ -67,17 +67,10 @@
       - name: homelab
         ipv4_address: 10.8.2.16
 
-- name: Get cadvisor latest release
-  community.general.github_release:
-    user: google
-    repo: cadvisor
-    action: latest_release
-  register: cadvisor_latest_release
-
 - name: Create cadvisor container
   community.docker.docker_container:
     name: cadvisor
-    image: gcr.io/cadvisor/cadvisor:{{ cadvisor_latest_release.tag }}
+    image: gcr.io/cadvisor/cadvisor:{{ cadvisor_version }}
     pull: true
     state: started
     restart_policy: unless-stopped
