@@ -35,7 +35,7 @@
         insecureSkipVerify: true
       providers:
         docker:
-          endpoint: "tcp://socket-proxy:2375"
+          endpoint: "unix:///var/run/docker.sock"
           exposedByDefault: false
       certificatesResolvers:
         cloudflare:
@@ -63,7 +63,6 @@
     networks:
       - name: homelab
         ipv4_address: 10.8.2.19
-      - name: socket_proxy
     ports:
       - "80:80"
       - "443:443"

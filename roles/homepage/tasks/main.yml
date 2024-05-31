@@ -29,10 +29,10 @@
     networks:
       - name: homelab
         ipv4_address: 10.8.2.11
-      - name: socket_proxy
     state: "started"
     volumes:
       - "{{ docker_dir }}/homepage:/app/config"
+      - /var/run/docker.sock:/var/run/docker.sock:ro
     restart_policy: unless-stopped
     labels:
       traefik.enable: "true"
