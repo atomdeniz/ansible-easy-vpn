@@ -7,7 +7,7 @@
     name: "dockerproxy"
     image: "ghcr.io/tecnativa/docker-socket-proxy:{{ dockerproxy_version }}"
     pull: yes
-    environment:
+    env:
       - CONTAINERS=1
       - SERVICES=1
       - TASKS=1
