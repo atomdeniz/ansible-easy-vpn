@@ -8,10 +8,10 @@
     image: "ghcr.io/tecnativa/docker-socket-proxy:{{ dockerproxy_version }}"
     pull: yes
     env:
-      - CONTAINERS=1
-      - SERVICES=1
-      - TASKS=1
-      - POST=0
+      "CONTAINERS": "1"
+      "SERVICES": "1"
+      "TASKS": "1"
+      "POST": "0"
     ports:
       - 127.0.0.1:2375:2375
     state: "started"
