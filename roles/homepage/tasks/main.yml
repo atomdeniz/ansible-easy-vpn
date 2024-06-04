@@ -1,4 +1,12 @@
 ---
+- name: Create the Homepage directory
+  ansible.builtin.file:
+    path: "{{ docker_dir }}/homepage"
+    state: directory
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: "0775"
+
 - name: Template the Homepage settings
   ansible.builtin.template:
     src: "settings.yaml"
