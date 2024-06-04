@@ -362,8 +362,15 @@ else
 fi
 
 # cloudflare mail and apikey 
+read -p "Enter your Cloudflare email: " cloudflare_email
+read -s -p "Enter your Cloudflare API key: " cloudflare_api_key
+echo
+
 echo "cloudflare_email: \"${cloudflare_email}\"" >> $HOME/ansible-easy-vpn/secret.yml
 echo "cloudflare_api_key: \"${cloudflare_api_key}\"" >> $HOME/ansible-easy-vpn/secret.yml
+
+echo "Credentials saved to $HOME/ansible-easy-vpn/secret.yml"
+
 
 # Traefik basic auth
 echo "traefik_basic_auth_hash: \"${traefik_basic_auth_hash}\"" >> $HOME/ansible-easy-vpn/secret.yml
