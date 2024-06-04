@@ -30,4 +30,3 @@
       traefik.http.routers.picoshare-secure.service: "picoshare"
       traefik.http.routers.picoshare-secure.middlewares: "authelia@docker"
       traefik.http.services.picoshare.loadbalancer.server.port: "4001"
-      traefik.docker.network: "homelab"

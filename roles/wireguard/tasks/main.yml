@@ -43,12 +43,12 @@
       traefik.http.routers.wg.entrypoints: "http"
       traefik.http.routers.wg.rule: "Host(`{{ wireguard_host }}`)"
       traefik.http.middlewares.wg-https-redirect.redirectscheme.scheme: "https"
-      traefik.http.routers.wg.middlewares: "wg-https-redirect"
+      traefik.http.routers.wg.middlewares: "wg-https-redirect,ipwhitelist"
       traefik.http.routers.wg-secure.entrypoints: "https"
       traefik.http.routers.wg-secure.rule: "Host(`{{ wireguard_host }}`)"
       traefik.http.routers.wg-secure.tls: "true"
       traefik.http.routers.wg-secure.service: "wg"
       traefik.http.routers.wg-secure.middlewares: "authelia@docker"
       traefik.http.services.wg.loadbalancer.server.port: "51821"
-      traefik.docker.network: "homelab"
+
     restart_policy: unless-stopped
