@@ -43,14 +43,32 @@
       - /var/run/docker.sock:/var/run/docker.sock:ro
     restart_policy: unless-stopped
     labels:
+      # HTTP Router for home.denizozogul.com
       traefik.enable: "true"
       traefik.http.routers.homepage.entrypoints: "http"
-      traefik.http.routers.homepage.rule: "Host(`{{ homepage_host }}`, `{{ www_host }}`)"
+      traefik.http.routers.homepage.rule: "Host(`home.denizozogul.com`)"
       traefik.http.middlewares.homepage-https-redirect.redirectscheme.scheme: "https"
       traefik.http.routers.homepage.middlewares: "homepage-https-redirect,mywwwremove,ipwhitelist"
+      
+      # HTTPS Router for home.denizozogul.com
       traefik.http.routers.homepage-secure.entrypoints: "https"
-      traefik.http.routers.homepage-secure.rule: "Host(`{{ homepage_host }}`, `{{ www_host }}`)"
+      traefik.http.routers.homepage-secure.rule: "Host(`home.denizozogul.com`)"
       traefik.http.routers.homepage-secure.tls: "true"
       traefik.http.routers.homepage-secure.service: "homepage"
       traefik.http.routers.homepage-secure.middlewares: "authelia@docker"
+      
+      # HTTP Router for www.denizozogul.com
+      traefik.http.routers.homepage-www.entrypoints: "http"
+      traefik.http.routers.homepage-www.rule: "Host(`www.denizozogul.com`)"
+      traefik.http.routers.homepage-www.middlewares: "homepage-https-redirect,mywwwremove,ipwhitelist"
+      
+      # HTTPS Router for www.denizozogul.com
+      traefik.http.routers.homepage-secure-www.entrypoints: "https"
+      traefik.http.routers.homepage-secure-www.rule: "Host(`www.denizozogul.com`)"
+      traefik.http.routers.homepage-secure-www.tls: "true"
+      traefik.http.routers.homepage-secure-www.service: "homepage"
+      traefik.http.routers.homepage-secure-www.middlewares: "authelia@docker"
+      
+      # Service
       traefik.http.services.homepage.loadbalancer.server.port: "3000"
+
