@@ -24,3 +24,4 @@
       traefik.http.routers.mywebsite-secure.service: "mywebsite"
       traefik.http.routers.mywebsite-secure.middlewares: "authelia@docker"
       traefik.http.services.mywebsite.loadbalancer.server.port: "8080"
+      traefik.docker.network: "homelab"

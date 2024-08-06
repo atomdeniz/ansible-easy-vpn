@@ -50,5 +50,5 @@
       traefik.http.routers.wg-secure.service: "wg"
       traefik.http.routers.wg-secure.middlewares: "authelia@docker"
       traefik.http.services.wg.loadbalancer.server.port: "51821"
-
+      traefik.docker.network: "homelab"
     restart_policy: unless-stopped

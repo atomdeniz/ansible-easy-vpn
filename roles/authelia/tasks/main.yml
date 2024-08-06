@@ -64,8 +64,7 @@
       traefik.http.middlewares.authelia.forwardauth.trustForwardHeader: "true"
       traefik.http.middlewares.authelia.forwardauth.authResponseHeaders: "Remote-User, Remote-Groups, Remote-Name, Remote-Email"
       traefik.http.routers.authelia.middlewares: "ipwhitelist"
-      
-
+      traefik.docker.network: "homelab"
     exposed_ports:
       - "9091"
     volumes:

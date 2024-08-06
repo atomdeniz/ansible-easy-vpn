@@ -27,3 +27,4 @@
       traefik.http.routers.portainer-secure.service: "portainer"
       traefik.http.routers.portainer-secure.middlewares: "authelia@docker"
       traefik.http.services.portainer.loadbalancer.server.port: "9000"
+      traefik.docker.network: "homelab"

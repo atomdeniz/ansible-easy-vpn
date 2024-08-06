@@ -26,3 +26,4 @@
       traefik.http.routers.changedetect-secure.service: "changedetect"
       traefik.http.routers.changedetect-secure.middlewares: "authelia@docker"
       traefik.http.services.changedetect.loadbalancer.server.port: "5000"
+      traefik.docker.network: "homelab"
