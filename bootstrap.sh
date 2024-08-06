@@ -351,18 +351,14 @@ echo "cloudflare_api_key: \"${cloudflare_api_key}\"" >> $HOME/ansible-easy-vpn/s
 
 echo "Credentials saved to $HOME/ansible-easy-vpn/secret.yml"
 
-read -s -p "Enter your picoshare password " picoshare_password
-echo
-
-echo "picoshare_password: \"${picoshare_shared_secret}\"" >> $HOME/ansible-easy-vpn/secret.yml
-
 read -s -p "Enter your traefik basic auth password " traefik_basic_auth_hash
 echo
 
 echo "traefik_basic_auth_hash: \"${traefik_basic_auth_hash}\"" >> $HOME/ansible-easy-vpn/secret.yml
 
-# Traefik basic auth
-echo "traefik_basic_auth_hash: \"${traefik_basic_auth_hash}\"" >> $HOME/ansible-easy-vpn/secret.yml
+
+read -s -p "Enter your picoshare_shared_secret password " picoshare_shared_secret
+echo
 
 # Pico shared secret  
 echo "picoshare_shared_secret: \"${picoshare_shared_secret}\"" >> $HOME/ansible-easy-vpn/secret.yml
