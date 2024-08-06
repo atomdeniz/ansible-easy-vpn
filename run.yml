@@ -101,6 +101,3 @@
       tags:
         - msmtp
 
-    - role: ssh
-      tags:
-        - ssh
