@@ -1,9 +1,9 @@
+---
 title: Deniz Homepage
 startUrl: https://denizozogul.com
 theme: dark
 headerStyle: clean
 cardBlur: md
-theme: dark
 color: zinc
 fiveColumns: true
 quicklaunch:
@@ -11,15 +11,7 @@ quicklaunch:
   hideInternetSearch: false
   showSearchSuggestions: true
   hideVisitURL: false
-
-# ### Providers
-# providers:
-#   openweathermap: apikeyapikeyapikeyapikeyapikey
-
-### Group layouts
 layout:
-
-## Homepage
   Management:
     tab: Home
     icon: mdi-monitor-dashboard
@@ -32,7 +24,7 @@ layout:
   Monitoring:
     tab: Home
     icon: mdi-message-alert
-  Network [local links only]:
+  "Network [local links only]":
     tab: Home
     icon: mdi-lan
   Media:
@@ -62,8 +54,6 @@ layout:
     useEqualHeights: true
     style: row
     columns: 5
-
-## Glances
   Windows PC:
     tab: Glances
     useEqualHeights: true
@@ -94,8 +84,6 @@ layout:
     style: row
     columns: 4
     initiallyCollapsed: true
-
-## Bookmarks
   Developer:
     icon: mdi-code-braces
   Shopping:
