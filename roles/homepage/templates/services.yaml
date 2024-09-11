@@ -6,22 +6,23 @@
 - Containers:
     - Portainer:
         icon: portainer.svg
-        href: "https://{{ portainer_host }}"
+        href: "https://{{portainer_host}}"
         description: docker
         widget:
           type: portainer
-          url: "{{ portainer_host }}"
-          env: 1
+          url: "https://portainer:9443"
+          env: 2
           key: "{{ portainer_api_key }}"
 - Network:
-    - Uptime Kuma:
-        icon: uptime-kuma.svg
-        href: "https://{{ uptime_kuma_host }}"
-        description: internal
+    - Adguard:
+        icon: adguard.svg
+        href: "https://{{adguard_host}}"
+        description: adguard
         widget:
-          type: uptimekuma
-          url: "{{ uptime_kuma_host }}"
-          slug: home
+          type: adguard
+          url: http://adguard-unbound-doh
+          username: admin
+          password: password
 - Other:
     - GitHub:
         icon: github.svg
