@@ -22,7 +22,7 @@
           type: adguard
           url: http://adguard-unbound-doh
           username: admin
-          password: password
+          password: "{{ adguard_password }}"
 - Other:
     - GitHub:
         icon: github.svg
