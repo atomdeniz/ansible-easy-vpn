@@ -4,7 +4,7 @@ bind_port: 3000
 beta_bind_port: 0
 users:
   - name: admin
-    password: "{{ adguard_password_hash }}"
+    password: "admin:$2y$05$X7aHKICUeZNQ1NCVz2fXM.sR2R4ZCI/ZiljKeOXQxCpGxo1BA.P4i"
 auth_attempts: 5
 block_auth_min: 15
 http_proxy: ""
