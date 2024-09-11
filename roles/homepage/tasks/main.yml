@@ -55,9 +55,8 @@
     name: "homepage"
     image: "ghcr.io/gethomepage/homepage:{{ homepage_version }}"
     pull: yes
-    env:
-      PUID: "1000"
-      PGID: "1000"
+    security_opts:
+      - no-new-privileges:true
     networks:
       - name: homelab
         ipv4_address: 10.8.2.11
