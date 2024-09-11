@@ -6,7 +6,7 @@
 - Containers:
     - Portainer:
         icon: portainer.svg
-        href: "{{ portainer_host }}"
+        href: "https://{{ portainer_host }}"
         description: docker
         widget:
           type: portainer
@@ -16,7 +16,7 @@
 - Network:
     - Uptime Kuma:
         icon: uptime-kuma.svg
-        href: "{{ uptime_kuma_host }}"
+        href: "https://{{ uptime_kuma_host }}"
         description: internal
         widget:
           type: uptimekuma
