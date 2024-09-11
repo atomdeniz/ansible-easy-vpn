@@ -353,7 +353,6 @@ echo "Credentials saved to $HOME/ansible-easy-vpn/secret.yml"
 
 read -s -p "Enter your traefik basic auth password " traefik_basic_auth_hash
 echo
-
 echo "traefik_basic_auth_hash: \"${traefik_basic_auth_hash}\"" >> $HOME/ansible-easy-vpn/secret.yml
 
 

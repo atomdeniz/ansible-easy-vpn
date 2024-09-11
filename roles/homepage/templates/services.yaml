@@ -1,0 +1,37 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/latest/configs/services
+# icons found here https://github.com/walkxcode/dashboard-icons
+
+- Containers:
+    - Portainer:
+        icon: portainer.svg
+        href: "{{ portainer_host }}"
+        description: docker
+        widget:
+          type: portainer
+          url: "{{ portainer_host }}"
+          env: 1
+          key: "{{ portainer_api_key }}"
+- Network:
+    - Uptime Kuma:
+        icon: uptime-kuma.svg
+        href: "{{ uptime_kuma_host }}"
+        description: internal
+        widget:
+          type: uptimekuma
+          url: "{{ uptime_kuma_host }}"
+          slug: home
+    # - Uptime Robot:
+    #     icon: https://play-lh.googleusercontent.com/cUrv0t00FYQ1GKLuOTvv8qjo1lSDjqZC16IOp3Fb6ijew6Br5m4o16HhDp0GBu_Bw8Y=w240-h480-rw
+    #     href: https://uptimerobot.com/dashboard
+    #     description: external
+    #     widget:
+    #       type: uptimerobot
+    #       url: https://api.uptimerobot.com
+    #       key: "{{HOMEPAGE_VAR_UPTIME_ROBOT_API_KEY}}"
+- Other:
+    - GitHub:
+        icon: github.svg
+        href: https://github.com
+        description: source code

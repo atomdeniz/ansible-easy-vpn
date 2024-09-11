@@ -13,7 +13,31 @@
     dest: "{{ docker_dir }}/homepage/settings.yaml"
     owner: "{{ username }}"
     group: "{{ username }}"
-    mode: "0775"
+    mode: "0664"
+
+- name: Template the Homepage widgets
+  ansible.builtin.template:
+    src: "widgets.yaml"
+    dest: "{{ docker_dir }}/homepage/widgets.yaml"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: "0664"
+
+- name: Template the Homepage bookmarks
+  ansible.builtin.template:
+    src: "bookmarks.yaml"
+    dest: "{{ docker_dir }}/homepage/bookmarks.yaml"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: "0664"
+
+- name: Template the Homepage services
+  ansible.builtin.template:
+    src: "services.yaml"
+    dest: "{{ docker_dir }}/homepage/services.yaml"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: "0664"
 
 - name: Template the Homepage docker settings
   ansible.builtin.template:
@@ -21,8 +45,8 @@
     dest: "{{ docker_dir }}/homepage/docker.yaml"
     owner: "{{ username }}"
     group: "{{ username }}"
-    mode: "0775"
-
+    mode: "0664"
+# burada bir hata aldım. chmode 0664 yapınca düzeldi
 - name: Make sure the Homepage container is created and running
   register: homepage_result
   retries: 5
