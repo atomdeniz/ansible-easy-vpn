@@ -1,8 +1,18 @@
----
-- name: Make sure the privatebin container is created and running https://ppfeufer.de/privatebin-your-self-hosted-pastebin-instance/
-  register: privatebin_result
-  retries: 5
-  until: privatebin_result is succeeded
+- name: Template the PrivateBin conf.php file
+  ansible.builtin.template:
+    src: conf.php
+    dest: "{{ docker_dir }}/privatebin/cfg/conf.php"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0644
+
+- name: Ensure privatebin-data directory is globally writeable
+  ansible.builtin.file:
+    path: "{{ docker_dir }}/privatebin/data"
+    mode: "0777"
+    state: directory
+
+- name: Make sure the privatebin container is created and running
   community.general.docker_container:
     name: "privatebin"
     image: "privatebin/nginx-fpm-alpine:{{ privatebin_version }}"
@@ -31,3 +41,29 @@
       traefik.http.routers.privatebin-secure.middlewares: "authelia@docker"
       traefik.http.services.privatebin.loadbalancer.server.port: "8080"
       traefik.docker.network: "homelab"
+  register: privatebin_result
+  retries: 5
+  until: privatebin_result.state == "running"
+
+- name: Create a test paste in PrivateBin container
+  community.general.docker_container_exec:
+    container: privatebin
+    command: "sh -c 'echo test-data > /srv/data/testfile.txt'"
+
+- name: Get the user and group of files in privatebin-data
+  ansible.builtin.command:
+    cmd: "ls -ld {{ docker_dir }}/privatebin/data/*"
+  register: file_info
+
+- name: Extract user and group from file info
+  set_fact:
+    privatebin_user: "{{ file_info.stdout_lines[0].split()[2] }}"
+    privatebin_group: "{{ file_info.stdout_lines[0].split()[3] }}"
+
+- name: Change ownership of privatebin-data directory
+  ansible.builtin.file:
+    path: "{{ docker_dir }}/privatebin/data"
+    owner: "{{ privatebin_user }}"
+    group: "{{ privatebin_group }}"
+    mode: "0700"
+    state: directory
