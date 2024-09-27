@@ -1,4 +1,15 @@
 ---
+- name: Create the PrivateBin config folders
+  ansible.builtin.file:
+    path: "{{ docker_dir }}/{{ item }}"
+    state: directory
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: "0755"
+  loop:
+    - privatebin/cfg
+    - privatebin/data
+
 - name: Template the PrivateBin conf.php file
   ansible.builtin.template:
     src: conf.php
