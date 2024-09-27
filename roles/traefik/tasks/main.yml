@@ -53,6 +53,11 @@
               resolvers:
                 - "1.1.1.1:53"
                 - "1.0.0.1:53"
+      experimental:
+        plugins:
+          AddForwardedHeader:
+            moduleName: "github.com/jerrywoo96/AddForwardedHeader"
+            version: "v1.0.1"
     dest: "{{ docker_dir }}/traefik/data/traefik.yml"
     mode: "0644"
     owner: "{{ username }}"
@@ -89,6 +94,8 @@
       traefik.http.middlewares.ipwhitelist.ipwhitelist.sourcerange: "{{ my_ip }}"
       traefik.http.middlewares.mywwwremove.redirectregex.regex: "^https://www\\.(.*)"
       traefik.http.middlewares.mywwwremove.redirectregex.replacement: "https://$${1}"
+      traefik.http.middlewares.my-AddForwardedHeader.plugin.AddForwardedHeader.by: "Traefik"
+      traefik.http.middlewares.my-AddForwardedHeader.plugin.AddForwardedHeader.forHeader: "X-Real-Ip"
       traefik.http.routers.traefik.middlewares: "traefik-https-redirect,ipwhitelist"
       traefik.http.routers.traefik-secure.entrypoints: "https"
       traefik.http.routers.traefik-secure.rule: "Host(`{{ traefik_host }}`)"
