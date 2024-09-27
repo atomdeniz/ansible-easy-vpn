@@ -46,9 +46,8 @@
   until: privatebin_result.state == "running"
 
 - name: Create a test paste in PrivateBin container
-  community.general.docker_container_exec:
-    container: privatebin
-    command: "sh -c 'echo test-data > /srv/data/testfile.txt'"
+  ansible.builtin.command:
+    cmd: "docker exec privatebin sh -c 'echo test-data > /srv/data/testfile.txt'"
 
 - name: Get the user and group of files in privatebin-data
   ansible.builtin.command:
