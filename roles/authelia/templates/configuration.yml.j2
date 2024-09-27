@@ -41,7 +41,7 @@ access_control:
     - domain: {{ wireguard_host }}
       policy: two_factor
     - domain: {{ vaultwarden_host }}
-      policy: two_factor
+      policy: bypass
     - domain: {{ changedetect_host }}
       policy: two_factor
     - domain: {{ portainer_host }}

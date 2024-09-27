@@ -53,8 +53,6 @@ all:
 
     wireguard_port: "51820"
 
-    vaultwarden_port: "3012"
-
     # Possible choices: cloudflare, quad9, google
     #
     # In case you've enabled Adguard, Unbound and DoH functionality,
@@ -101,9 +99,6 @@ all:
       - desc: "Allow Wireguard"
         proto: udp
         port: "{{ wireguard_port }}"
-      - desc: "Allow Vaultwarden"
-        proto: tcp
-        port: "{{ vaultwarden_port }}"
       - desc: "Allow HTTP"
         proto: tcp
         port: "80"
