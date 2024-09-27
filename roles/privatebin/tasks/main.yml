@@ -41,9 +41,6 @@
       traefik.http.routers.privatebin-secure.middlewares: "authelia@docker"
       traefik.http.services.privatebin.loadbalancer.server.port: "8080"
       traefik.docker.network: "homelab"
-  register: privatebin_result
-  retries: 5
-  until: privatebin_result.state == "running"
 
 - name: Create a test paste in PrivateBin container
   ansible.builtin.command:
