@@ -29,8 +29,14 @@
               entryPoint:
                 to: "https"
                 scheme: "https"
+          forwardedHeaders:
+            trustedIPs:
+              - "{{ my_ip }}"
         https:
           address: ":443"
+          forwardedHeaders:
+            trustedIPs:
+              - "{{ my_ip }}"
       serversTransport:
         insecureSkipVerify: true
       providers:
