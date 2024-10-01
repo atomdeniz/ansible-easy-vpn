@@ -47,6 +47,5 @@
       traefik.http.routers.privatebin-secure.rule: "Host(`{{ privatebin_host }}`)"
       traefik.http.routers.privatebin-secure.tls: "true"
       traefik.http.routers.privatebin-secure.service: "privatebin"
-      traefik.http.routers.privatebin-secure.middlewares: "authelia@docker"
       traefik.http.services.privatebin.loadbalancer.server.port: "8080"
       traefik.docker.network: "homelab"

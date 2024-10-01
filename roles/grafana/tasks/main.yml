@@ -117,6 +117,5 @@
       traefik.http.routers.grafana-secure.rule: "Host(`{{ grafana_host }}`)"
       traefik.http.routers.grafana-secure.tls: "true"
       traefik.http.routers.grafana-secure.service: "grafana"
-      traefik.http.routers.grafana-secure.middlewares: "authelia@docker"
       traefik.http.services.grafana.loadbalancer.server.port: "3000"
       traefik.docker.network: "homelab"
