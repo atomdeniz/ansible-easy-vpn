@@ -72,10 +72,6 @@
       tags:
         - portainer
 
-    - role: privatebin
-      tags:
-        - privatebin
-
     - role: homepage
       tags:
         - homepage
@@ -100,4 +96,3 @@
       when: email_password is defined
       tags:
         - msmtp
-

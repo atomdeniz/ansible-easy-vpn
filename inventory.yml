@@ -37,8 +37,6 @@ all:
 
     picoshare_host: "share.{{ root_host }}"
 
-    privatebin_host: "paste.{{ root_host }}"
-
     traefik_host: "traefik.{{ root_host }}"
 
     grafana_host: "grafana.{{ root_host }}"
