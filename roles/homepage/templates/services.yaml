@@ -3,7 +3,7 @@
 # https://gethomepage.dev/latest/configs/services
 # icons found here https://github.com/walkxcode/dashboard-icons
 
-- Containers:
+- Resources:
     - Portainer:
         icon: portainer.svg
         href: "https://{{ portainer_host }}"
@@ -13,6 +13,23 @@
           url: "https://portainer:9443"
           env: 2
           key: "{{ portainer_api_key }}"
+    - Grafana:
+        icon: grafana.svg
+        href: "https://{{ grafana_host }}"
+        description: grafana
+        widget:
+          type: grafana
+          url: "https://grafana:3000"
+          username: admin
+          password: "{{ grafana_password }}"
+    - WgEasy:
+        icon: uptimekuma.svg
+        href: "https://{{ uptime_kuma_host }}"
+        description: uptimekuma
+        widget:
+          type: uptimekuma
+          url: http://uptime_kuma
+          slug: server
 - Network:
     - Adguard:
         icon: adguard.svg
@@ -29,7 +46,7 @@
         description: traefik
         widget:
           type: traefik
-          url: http://traefik
+          url: http://traefik:8080
           username: user
           password: "{{ traefik_password }}"
     - WgEasy:
@@ -38,9 +55,9 @@
         description: wg-easy
         widget:
           type: wg-easy
-          url: http://wg-easy
+          url: http://wg-easy:51821
           username: user
-          password: "{{ traefik_password }}"
+          password: "{{ wireguard_password }}"
 - Other:
     - GitHub:
         icon: github.svg
