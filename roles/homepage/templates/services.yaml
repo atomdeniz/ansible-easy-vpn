@@ -20,9 +20,18 @@
         description: adguard
         widget:
           type: adguard
-          url: http://adguard-unbound-doh
+          url: http://adguard-unbound-doh:3000
           username: admin
           password: "{{ adguard_password }}"
+    - Traefik:
+        icon: traefik.svg
+        href: "https://{{traefik_host}}"
+        description: traefik
+        widget:
+          type: traefik
+          url: http://traefik
+          username: user
+          password: "{{ traefik_password }}"
 - Other:
     - GitHub:
         icon: github.svg
