@@ -6,7 +6,7 @@
 - Containers:
     - Portainer:
         icon: portainer.svg
-        href: "https://{{portainer_host}}"
+        href: "https://{{ portainer_host }}"
         description: docker
         widget:
           type: portainer
@@ -16,7 +16,7 @@
 - Network:
     - Adguard:
         icon: adguard.svg
-        href: "https://{{adguard_host}}"
+        href: "https://{{ adguard_host }}"
         description: adguard
         widget:
           type: adguard
@@ -25,20 +25,20 @@
           password: "{{ adguard_password }}"
     - Traefik:
         icon: traefik.svg
-        href: "https://{{traefik_host}}"
+        href: "https://{{ traefik_host }}"
         description: traefik
         widget:
           type: traefik
           url: http://traefik
           username: user
           password: "{{ traefik_password }}"
-    - Traefik:
-        icon: traefik.svg
-        href: "https://{{traefik_host}}"
-        description: traefik
+    - WgEasy:
+        icon: wg-easy.svg
+        href: "https://{{ wireguard_host }}"
+        description: wg-easy
         widget:
-          type: traefik
-          url: http://traefik:8080
+          type: wg-easy
+          url: http://wg-easy
           username: user
           password: "{{ traefik_password }}"
 - Other:
