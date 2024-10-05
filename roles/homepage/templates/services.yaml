@@ -32,6 +32,15 @@
           url: http://traefik
           username: user
           password: "{{ traefik_password }}"
+    - Traefik:
+        icon: traefik.svg
+        href: "https://{{traefik_host}}"
+        description: traefik
+        widget:
+          type: traefik
+          url: http://traefik:8080
+          username: user
+          password: "{{ traefik_password }}"
 - Other:
     - GitHub:
         icon: github.svg

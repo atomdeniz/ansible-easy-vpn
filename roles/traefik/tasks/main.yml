@@ -19,7 +19,7 @@
   ansible.builtin.copy:
     content: |
       api:
-        insecure : true
+        insecure: true
         debug: true
         dashboard: true
       entryPoints:
