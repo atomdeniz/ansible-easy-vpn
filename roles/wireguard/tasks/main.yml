@@ -1,4 +1,8 @@
 ---
+- name: Switch between encrypted and unencrypted DNS depending on the user choice
+  ansible.builtin.set_fact:
+    wireguard_dns: "10.8.2.2"
+
 - name: Install Shadowsocks server using Docker
   community.general.docker_container:
     name: "shadowsocks"
