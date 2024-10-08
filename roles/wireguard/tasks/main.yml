@@ -1,18 +1,24 @@
 ---
-- name: Switch between encrypted and unencrypted DNS depending on the user choice
-  ansible.builtin.set_fact:
-    wireguard_dns: "10.8.2.2"
+- name: Install Shadowsocks server using Docker
+  community.general.docker_container:
+    name: "shadowsocks"
+    image: "shadowsocks/shadowsocks-libev"
+    pull: yes
+    state: "started"
+    restart_policy: unless-stopped
+    ports:
+      - "8388:8388/tcp"
+      - "8388:8388/udp"
+    env:
+      - "PASSWORD="12345"
+      - "METHOD=chacha20-ietf-poly1305"
+    volumes:
+      - "/etc/shadowsocks-libev:/etc/shadowsocks-libev"
+    networks:
+      - name: homelab
+        ipv4_address: 10.8.2.5
 
-- name: Load the iptable_nat module (CentOS)
-  when: 'ansible_os_family == "RedHat"'
-  community.general.modprobe:
-    name: iptable_nat
-    persistent: present
-
-- name: Make sure the Wireguard container is created and running
-  register: wireguard_result
-  retries: 5
-  until: wireguard_result is succeeded
+- name: Configure WireGuard to use Shadowsocks as a proxy
   community.general.docker_container:
     name: "wg-easy"
     image: "ghcr.io/wg-easy/wg-easy:{{ wg_easy_version }}"
@@ -35,6 +41,7 @@
       "WG_PERSISTENT_KEEPALIVE": "25"
       "WG_ALLOWED_IPS": "{{ wireguard_client_allowed_ips }}"
       "PASSWORD_HASH": "{{ wireguard_password_hash }}"
+      "SOCKS5_PROXY": "socks5://10.8.2.5:8388"
     ports:
       - "{{ wireguard_port }}:51820/udp"
     volumes:

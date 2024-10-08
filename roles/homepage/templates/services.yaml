@@ -15,7 +15,7 @@
     - Watchtower:
         widget:
           type: watchtower
-          url: "https://watchtower:8080"
+          url: "http://watchtower:8080"
           key: "{{ watchtower_token }}"
     - Grafana:
         icon: grafana.svg
