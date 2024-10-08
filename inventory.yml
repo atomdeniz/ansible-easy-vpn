@@ -51,6 +51,8 @@ all:
 
     wireguard_port: "51820"
 
+    shadowsocks_port: "1433"
+
     # Possible choices: cloudflare, quad9, google
     #
     # In case you've enabled Adguard, Unbound and DoH functionality,
@@ -97,6 +99,12 @@ all:
       - desc: "Allow Wireguard"
         proto: udp
         port: "{{ wireguard_port }}"
+      - desc: "Allow Shadowsocks UDP"
+        proto: udp
+        port: "{{ shadowsocks_port }}"
+      - desc: "Allow Shadowsocks TCP"
+        proto: tcp
+        port: "{{ shadowsocks_port }}"
       - desc: "Allow HTTP"
         proto: tcp
         port: "80"

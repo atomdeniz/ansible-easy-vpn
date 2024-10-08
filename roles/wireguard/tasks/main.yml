@@ -11,11 +11,11 @@
     state: "started"
     restart_policy: unless-stopped
     ports:
-      - "8388:8388/tcp"
-      - "8388:8388/udp"
+      - "{{ shadowsocks_port }}:1433/tcp"
+      - "{{ shadowsocks_port }}:1433/udp"
     env:
       "PASSWORD": "12345"
-      "METHOD": chacha20-ietf-poly1305"
+      "METHOD": "chacha20-ietf-poly1305"
     volumes:
       - "/etc/shadowsocks-libev:/etc/shadowsocks-libev"
     networks:
@@ -45,7 +45,7 @@
       "WG_PERSISTENT_KEEPALIVE": "25"
       "WG_ALLOWED_IPS": "{{ wireguard_client_allowed_ips }}"
       "PASSWORD_HASH": "{{ wireguard_password_hash }}"
-      "SOCKS5_PROXY": "socks5://10.8.2.5:8388"
+      "SOCKS5_PROXY": "socks5://10.8.2.5:1433"
     ports:
       - "{{ wireguard_port }}:51820/udp"
     volumes:
