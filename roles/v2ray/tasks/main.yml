@@ -1,4 +1,20 @@
 ---
+- name: Create the v2ray directory
+  ansible.builtin.file:
+    path: "{{ docker_dir }}/v2ray"
+    state: directory
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: "0775"
+
+- name: Template the config
+  ansible.builtin.template:
+    src: "config.json"
+    dest: "{{ docker_dir }}/v2ray/config.json"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: "0664"
+
 - name: Install V2Ray server using Docker
   community.general.docker_container:
     name: "v2ray"
@@ -8,7 +24,7 @@
     state: "started"
     restart_policy: unless-stopped
     volumes:
-      - "/etc/v2ray:/etc/v2ray"
+      - "{{ docker_dir }}/v2ray:/etc/v2ray"
     networks:
       - name: homelab
         ipv4_address: 10.8.2.5
@@ -16,7 +32,15 @@
       V2RAY_VMESS_AEAD_FORCED: "false"
     labels:
       traefik.enable: "true"
-      traefik.http.routers.v2ray.rule: "Host(`{{ v2ray_host }}`)"
-      traefik.http.routers.v2ray.entrypoints: "https"
-      traefik.http.services.v2ray.loadbalancer.server.port: "10000"
-      traefik.docker.network: "homelab"
+      traefik.http.routers.api1.entrypoints: "https"
+      traefik.http.routers.api1.tls.domains[0].main: "Host(`{{ v2ray_host }}`)"
+      traefik.http.routers.api1.rule: PathPrefix(`/wsm`)
+      traefik.http.routers.api1.tls: true
+      traefik.http.routers.api1.service: api1
+      traefik.http.services.api1.loadbalancer.server.port: 1000
+      traefik.http.routers.api2.entrypoints: "https"
+      traefik.http.routers.api2.tls.domains[0].main: "Host(`{{ v2ray_host }}`)"
+      traefik.http.routers.api2.rule: PathPrefix(`/wsl`)
+      traefik.http.routers.api2.tls: true
+      traefik.http.routers.api2.service: api2
+      traefik.http.services.api2.loadbalancer.server.port: 1001
