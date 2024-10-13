@@ -3,6 +3,7 @@
   community.general.docker_container:
     name: "v2ray"
     image: "v2fly/v2fly-core"
+    command: run -c /etc/v2ray/config.json
     pull: yes
     state: "started"
     restart_policy: unless-stopped
