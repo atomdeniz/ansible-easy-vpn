@@ -52,6 +52,10 @@
       tags:
         - traefik
 
+    - role: shadowsocks
+      tags:
+        - shadowsocks
+
     - role: wireguard
       tags:
         - wireguard
