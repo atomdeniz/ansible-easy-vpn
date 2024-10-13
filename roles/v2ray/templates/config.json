@@ -1,41 +1,69 @@
 {
+  "api": {
+    "services": ["HandlerService", "LoggerService", "StatsService"],
+    "tag": "api"
+  },
+  "stats": {},
+  "reverse": null,
+  "fakeDns": null,
+  "log": null,
   "inbounds": [
     {
+      "listen": null,
       "port": 1000,
-      "listen": "127.0.0.1",
       "protocol": "vmess",
       "settings": {
         "clients": [
           {
-            "id": "2a47fd4c-bebc-47e1-92b4-9e7d40f88078"
+            "id": "2a47fd4c-bebc-47e1-92b4-9e7d40f88078",
+            "alterId": 0
+          },
+          {
+            "id": "3cf218bd-da68-4dbe-bbae-62947de61663",
+            "alterId": 1
           }
         ]
       },
       "streamSettings": {
         "network": "ws",
+        "security": "none",
         "wsSettings": {
-          "path": "/wsm"
+          "path": "/wsm",
+          "headers": {}
         }
+      },
+      "tag": "my-vmess",
+      "sniffing": {
+        "enabled": true,
+        "destOverride": ["http", "tls"]
       }
     },
     {
+      "listen": null,
       "port": 1001,
-      "listen": "127.0.0.1",
       "protocol": "vless",
       "settings": {
-        "decryption": "none",
         "clients": [
           {
-            "id": "2a47fd4c-bebc-47e1-92b4-9e7d40f88078",
-            "level": 0
+            "id": "fb7e7e18-a137-46e2-9edb-df9d9e2bbdf1",
+            "alterId": 2
           }
-        ]
+        ],
+        "decryption": "none",
+        "fallbacks": []
       },
       "streamSettings": {
         "network": "ws",
+        "security": "none",
         "wsSettings": {
-          "path": "/wsl"
+          "path": "/wsl",
+          "headers": {}
         }
+      },
+      "tag": "my-vless",
+      "sniffing": {
+        "enabled": true,
+        "destOverride": ["http", "tls"]
       }
     }
   ],
@@ -43,6 +71,18 @@
     {
       "protocol": "freedom",
       "settings": {}
+    },
+    {
+      "protocol": "blackhole",
+      "settings": {},
+      "tag": "blocked"
     }
-  ]
+  ],
+  "policy": {
+    "system": {
+      "statsInboundDownlink": true,
+      "statsInboundUplink": true
+    }
+  },
+  "transport": null
 }
