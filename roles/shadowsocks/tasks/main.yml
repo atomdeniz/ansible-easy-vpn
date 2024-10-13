@@ -18,6 +18,5 @@
       traefik.enable: "true"
       traefik.http.routers.shadowsocks.rule: "Host(`{{ shadowsocks_host }}`)"
       traefik.http.routers.shadowsocks.entrypoints: "https"
-      traefik.http.routers.shadowsocks.tls.certresolver: "letsencrypt"
       traefik.http.services.shadowsocks.loadbalancer.server.port: "8388"
       traefik.docker.network: "homelab"
