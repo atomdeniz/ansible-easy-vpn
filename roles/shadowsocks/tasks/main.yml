@@ -15,7 +15,7 @@
       V2RAY_VMESS_AEAD_FORCED: "false"
     labels:
       traefik.enable: "true"
-      traefik.http.routers.shadowsocks.rule: "Host(`{{ shadowsocks_host }}`)"
-      traefik.http.routers.shadowsocks.entrypoints: "https"
-      traefik.http.services.shadowsocks.loadbalancer.server.port: "10000"
+      traefik.http.routers.v2ray.rule: "Host(`{{ shadowsocks_host }}`)"
+      traefik.http.routers.v2ray.entrypoints: "https"
+      traefik.http.services.v2ray.loadbalancer.server.port: "10000"
       traefik.docker.network: "homelab"
