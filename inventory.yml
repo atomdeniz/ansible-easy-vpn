@@ -23,7 +23,7 @@ all:
 
     authelia_host: "auth.{{ root_host }}"
 
-    shadowsocks_host: "shadow.{{ root_host }}"
+    v2ray_host: "v2ray.{{ root_host }}"
 
     wireguard_host: "vpn.{{ root_host }}"
 

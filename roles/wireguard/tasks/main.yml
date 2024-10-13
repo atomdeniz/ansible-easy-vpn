@@ -3,7 +3,7 @@
   ansible.builtin.set_fact:
     wireguard_dns: "10.8.2.2"
 
-- name: Configure WireGuard to use Shadowsocks as a proxy
+- name: Configure WireGuard to use as a proxy
   community.general.docker_container:
     name: "wg-easy"
     image: "ghcr.io/wg-easy/wg-easy:{{ wg_easy_version }}"

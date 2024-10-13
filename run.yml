@@ -52,9 +52,9 @@
       tags:
         - traefik
 
-    - role: shadowsocks
+    - role: v2ray
       tags:
-        - shadowsocks
+        - v2ray
 
     - role: wireguard
       tags:
