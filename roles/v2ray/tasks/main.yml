@@ -10,7 +10,7 @@
       - "/etc/v2ray/config.json:/etc/v2ray/config.json:ro"
     networks:
       - name: homelab
-        ipv4_address: 10.8.2.21
+        ipv4_address: 10.8.2.22
     env:
       V2RAY_VMESS_AEAD_FORCED: "false"
     labels:
