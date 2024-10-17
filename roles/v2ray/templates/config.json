@@ -4,10 +4,7 @@
     "loglevel": "info"
   },
   "dns": {
-    "disableCache": true,
-    "disableFallback": false,
-    "queryStrategy": "UseIP",
-    "servers": [{ "address": "10.8.2.2", "port": 53 }]
+    "servers": [{ "address": "http://adguard-unbound-doh", "port": 53 }]
   },
   "inbounds": [
     {
