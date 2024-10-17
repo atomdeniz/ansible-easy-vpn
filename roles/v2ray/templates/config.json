@@ -7,6 +7,13 @@
   "reverse": null,
   "fakeDns": null,
   "log": null,
+  "dns": {
+    "servers": [
+      {
+        "address": "10.8.2.2"
+      }
+    ]
+  },
   "inbounds": [
     {
       "listen": null,
@@ -26,7 +33,7 @@
       },
       "streamSettings": {
         "network": "ws",
-        "security": "none",
+        "security": "auto",
         "wsSettings": {
           "path": "/wsm",
           "headers": {}
