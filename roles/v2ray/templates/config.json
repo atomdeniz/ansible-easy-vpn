@@ -10,6 +10,9 @@
   "dns": {
     "servers": [
       {
+        "disableCache": true,
+        "disableFallback": false,
+        "queryStrategy": "UseIP",
         "address": "10.8.2.2"
       }
     ]
