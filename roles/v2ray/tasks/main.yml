@@ -28,7 +28,8 @@
     networks:
       - name: homelab
         ipv4_address: 10.8.2.5
-    dns: 10.8.2.2
+    dns_servers:
+      - 10.8.2.2
     env:
       V2RAY_VMESS_AEAD_FORCED: "false"
     labels:
