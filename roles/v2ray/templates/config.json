@@ -3,21 +3,6 @@
     "access": "none",
     "loglevel": "info"
   },
-
-  "dns": {
-    "hosts": {
-      "denizozogul.com": "127.0.0.1"
-    },
-    "servers": [
-      {
-        "address": "10.8.2.2",
-        "port": 53
-      }
-    ],
-    "clientIp": "10.8.2.2",
-    "tag": "dns_inbound"
-  },
-
   "inbounds": [
     {
       "listen": null,
