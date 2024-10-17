@@ -1,21 +1,13 @@
 {
-  "api": {
-    "services": ["HandlerService", "LoggerService", "StatsService"],
-    "tag": "api"
+  "log": {
+    "access": "none",
+    "loglevel": "info"
   },
-  "stats": {},
-  "reverse": null,
-  "fakeDns": null,
-  "log": null,
   "dns": {
-    "servers": [
-      {
-        "disableCache": true,
-        "disableFallback": false,
-        "queryStrategy": "UseIP",
-        "address": "10.8.2.2"
-      }
-    ]
+    "disableCache": true,
+    "disableFallback": false,
+    "queryStrategy": "UseIP",
+    "servers": [{ "address": "10.8.2.2", "port": 53 }]
   },
   "inbounds": [
     {
@@ -87,12 +79,5 @@
       "settings": {},
       "tag": "blocked"
     }
-  ],
-  "policy": {
-    "system": {
-      "statsInboundDownlink": true,
-      "statsInboundUplink": true
-    }
-  },
-  "transport": null
+  ]
 }
