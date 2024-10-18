@@ -58,7 +58,7 @@
           username: user
           password: "{{ wireguard_password }}"
 - Other:
-     - Changedetect:
+    - Changedetect:
         icon: changedetection-io.svg
         href: "https://{{ changedetect_host }}"
         widget:
