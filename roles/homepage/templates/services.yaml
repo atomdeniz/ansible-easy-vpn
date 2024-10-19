@@ -62,7 +62,7 @@
         icon: changedetection-io.svg
         href: "https://{{ changedetect_host }}"
         widget:
-          type: changedetect
+          type: changedetectionio
           url: http://changedetect:4000
           password: "{{ changedetection_api_key }}"
     - GitHub:
