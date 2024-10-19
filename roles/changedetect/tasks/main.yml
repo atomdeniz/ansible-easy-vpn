@@ -12,7 +12,7 @@
         ipv4_address: 10.8.2.9
     state: "started"
     volumes:
-      - "{{ docker_dir }}/datastore"
+      - "{{ docker_dir }}/changedetect:/config"
     restart_policy: unless-stopped
     labels:
       traefik.enable: "true"
