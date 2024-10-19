@@ -64,6 +64,14 @@
       tags:
         - vaultwarden
 
+    - role: postgres
+      tags:
+        - postgres
+
+    - role: strapi
+      tags:
+        - strapi
+
     - role: changedetect
       tags:
         - changedetect
