@@ -1,0 +1,20 @@
+---
+- name: Make sure the postgres container is created and running
+  register: postgres_result
+  retries: 5
+  until: postgres_result is succeeded
+  community.general.docker_container:
+    name: "postgres"
+    image: postgres
+    pull: yes
+    env:
+      "POSTGRES_USER": "postgres"
+      "POSTGRES_PASSWORD": "{{ postgres_password }}"
+      "POSTGRES_DB": strapi_db
+    networks:
+      - name: homelab
+        ipv4_address: 10.8.2.23
+    state: "started"
+    volumes:
+      - "{{ docker_dir }}/postgres:/var/lib/postgresql/data"
+    restart_policy: unless-stopped

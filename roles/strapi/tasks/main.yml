@@ -1,0 +1,35 @@
+---
+- name: Make sure the strapi container is created and running
+  register: strapi_result
+  retries: 5
+  until: strapi_result is succeeded
+  community.general.docker_container:
+    name: "strapi"
+    image: "strapi/strapi:{{ strapi_version }}"
+    pull: yes
+    env:
+      DATABASE_CLIENT: postgres
+      DATABASE_HOST: postgres
+      DATABASE_PORT: 5432
+      DATABASE_NAME: strapi_db
+      DATABASE_USERNAME: postgres
+      DATABASE_PASSWORD: "{{ postgres_password }}"
+    networks:
+      - name: homelab
+        ipv4_address: 10.8.2.22
+    state: "started"
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.strapi.entrypoints: "http"
+      traefik.http.routers.strapi.rule: "Host(`{{ strapi_host }}`)"
+      traefik.http.middlewares.strapi-https-redirect.redirectscheme.scheme: "https"
+      traefik.http.routers.strapi.middlewares: "strapi-https-redirect"
+      traefik.http.routers.strapi-secure.entrypoints: "https"
+      traefik.http.routers.strapi-secure.rule: "Host(`{{ strapi_host }}`)"
+      traefik.http.routers.strapi-secure.tls: "true"
+      traefik.http.routers.strapi-secure.service: "strapi"
+      traefik.http.services.strapi.loadbalancer.server.port: "1337"
+      traefik.docker.network: "homelab"
+    volumes:
+      - "{{ docker_dir }}/strapi:/srv/app"
+    restart_policy: unless-stopped

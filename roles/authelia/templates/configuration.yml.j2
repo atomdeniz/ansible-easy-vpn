@@ -36,6 +36,8 @@ access_control:
       policy: bypass
     - domain: {{ picoshare_host }}
       policy: bypass
+    - domain: {{ strapi_host }}
+      policy: two_factor
     - domain: {{ homepage_host }}
       policy: two_factor
     - domain: {{ wireguard_host }}

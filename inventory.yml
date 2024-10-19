@@ -31,6 +31,8 @@ all:
 
     vaultwarden_host: "password.{{ root_host }}"
 
+    strapi_host: "strapi.{{ root_host }}"
+
     changedetect_host: "changedetect.{{ root_host }}"
 
     adguard_host: "adguard.{{ root_host }}"

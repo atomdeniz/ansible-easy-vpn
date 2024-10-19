@@ -73,7 +73,7 @@
       traefik.http.routers.adguard.entrypoints: "http"
       traefik.http.routers.adguard.rule: "Host(`{{ adguard_host }}`)"
       traefik.http.middlewares.adguard-https-redirect.redirectscheme.scheme: "https"
-      traefik.http.routers.adguard.middlewares: "adguard-https-redirect,ipwhitelist"
+      traefik.http.routers.adguard.middlewares: "adguard-https-redirect"
       traefik.http.routers.adguard-secure.entrypoints: "https"
       traefik.http.routers.adguard-secure.rule: "Host(`{{ adguard_host }}`)"
       traefik.http.routers.adguard-secure.tls: "true"

@@ -19,7 +19,7 @@
       traefik.http.routers.changedetect.entrypoints: "http"
       traefik.http.routers.changedetect.rule: "Host(`{{ changedetect_host }}`)"
       traefik.http.middlewares.changedetect-https-redirect.redirectscheme.scheme: "https"
-      traefik.http.routers.changedetect.middlewares: "changedetect-https-redirect,ipwhitelist"
+      traefik.http.routers.changedetect.middlewares: "changedetect-https-redirect"
       traefik.http.routers.changedetect-secure.entrypoints: "https"
       traefik.http.routers.changedetect-secure.rule: "Host(`{{ changedetect_host }}`)"
       traefik.http.routers.changedetect-secure.tls: "true"
