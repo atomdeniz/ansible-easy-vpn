@@ -8,8 +8,8 @@
     image: "mtlynch/picoshare:{{ picoshare_version }}"
     pull: yes
     env:
-      "PORT": "4001"
-      "PS_SHARED_SECRET": "{{ picoshare_shared_secret }}"
+      PORT: "4001"
+      PS_SHARED_SECRET: "{{ picoshare_shared_secret }}"
     networks:
       - name: homelab
         ipv4_address: 10.8.2.12

@@ -8,9 +8,9 @@
     image: postgres
     pull: yes
     env:
-      "POSTGRES_USER": "postgres"
-      "POSTGRES_PASSWORD": "{{ postgres_password }}"
-      "POSTGRES_DB": strapi_db
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "{{ postgres_password }}"
+      POSTGRES_DB: strapi_db
     networks:
       - name: homelab
         ipv4_address: 10.8.2.23

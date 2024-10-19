@@ -19,13 +19,13 @@
       - sys_module
     state: "started"
     env:
-      "WG_HOST": "{{ wireguard_host }}"
-      "WG_DEFAULT_DNS": "{{ wireguard_dns }}"
-      "WG_DEFAULT_ADDRESS": "{{ wireguard_subnet }}"
-      "WG_PORT": "{{ wireguard_port }}"
-      "WG_PERSISTENT_KEEPALIVE": "25"
-      "WG_ALLOWED_IPS": "{{ wireguard_client_allowed_ips }}"
-      "PASSWORD_HASH": "{{ wireguard_password_hash }}"
+      WG_HOST: "{{ wireguard_host }}"
+      WG_DEFAULT_DNS: "{{ wireguard_dns }}"
+      WG_DEFAULT_ADDRESS: "{{ wireguard_subnet }}"
+      WG_PORT: "{{ wireguard_port }}"
+      WG_PERSISTENT_KEEPALIVE: "25"
+      WG_ALLOWED_IPS: "{{ wireguard_client_allowed_ips }}"
+      PASSWORD_HASH: "{{ wireguard_password_hash }}"
     ports:
       - "{{ wireguard_port }}:51820/udp"
     volumes:
