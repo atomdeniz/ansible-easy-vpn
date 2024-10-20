@@ -6,7 +6,7 @@
   community.general.docker_container:
     name: "strapi"
     image: "strapi/strapi:{{ strapi_version }}"
-    platform: linux/amd64
+    platform: linux/arm64
     pull: yes
     env:
       DATABASE_CLIENT: "postgres"
